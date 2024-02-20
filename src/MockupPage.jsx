@@ -1,7 +1,7 @@
 import React from "react";
 import Search from "./Search";
 import Bubble from "./Bubble";
-import { AiFillAlert } from "react-icons/ai";
+import Pipe from "./Pipe";
 import { VscJson } from "react-icons/vsc";
 import { VscTextSize } from "react-icons/vsc";
 import { VscSymbolColor } from "react-icons/vsc";
@@ -15,7 +15,7 @@ import { useState } from "react";
 const MockupPage = () => {
 	const [searchQuery, setSearchQuery] = useState("");
 
-	const lele = [
+	const [lele, setLele] = useState([
 		{ title: "JSON Converter", icon: VscJson },
 		{ title: "Text Compare  ", icon: VscTextSize },
 		{ title: "Color Conversion", icon: VscSymbolColor },
@@ -25,24 +25,28 @@ const MockupPage = () => {
 		{ title: "Base64 Encoder", icon: FiHash },
 		{ title: "Hash Generator", icon: FiHash },
 		{ title: "CSS Unit Converter", icon: PiFileCssLight },
-	];
+	]);
+
+	const handleDragStart = (e, tool) => {
+		e.dataTransfer.setData("toolTitle", tool);
+	};
 
 	const filteredBubbles = lele.filter((item) =>
 		item.title.toLowerCase().includes(searchQuery.toLowerCase()),
 	);
 
 	return (
-		<>
-			<div className="absolute min-h-screen w-full translate-y-48 bg-[url('/slopes.png')] bg-cover"></div>
-			<div className="flex min-h-screen w-full flex-col items-center justify-start space-y-20 bg-zinc-900 px-72 py-28">
+		<div className="flex flex-row items-start justify-between bg-zinc-900 py-20">
+			<div className="flex min-h-screen w-3/5 flex-col items-center justify-start space-y-16">
 				<Search
 					onChange={(e) => {
-						setSearchQuery(e.target.value);
+						setTimeout(setSearchQuery(e.target.value), 1500);
 					}}
 				/>
-				<div className="grid w-full grid-cols-3">
+				<div className="grid w-10/12 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
 					{filteredBubbles.map((item, index) => (
 						<Bubble
+							handleDragStart={handleDragStart}
 							key={index}
 							title={item.title}
 							icon={item.icon}
@@ -50,7 +54,8 @@ const MockupPage = () => {
 					))}
 				</div>
 			</div>
-		</>
+			<Pipe />
+		</div>
 	);
 };
 
