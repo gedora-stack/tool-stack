@@ -9,6 +9,7 @@ const Bubble = ({ title, icon: Icon }) => {
 				initial={{ opacity: 0, scale: 0 }}
 				animate={{ opacity: 1, scale: 1 }}
 				exit={{ opacity: 0, scale: 0 }}
+				whileHover={{ scale: 1.05 }}
 				transition={{ duration: 0.3 }}
 				className="m-10 flex flex-col items-center justify-center space-y-10 rounded-3xl bg-zinc-800 bg-opacity-40 py-10 outline outline-1 outline-zinc-600 backdrop-blur-lg"
 			>
