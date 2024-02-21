@@ -62,7 +62,7 @@ const PipeBubble = ({
 				onDragStart={(e) =>
 					handleDragStart(e, { id: id, title: title, index: index })
 				}
-				className="flex w-[12rem] flex-row items-center justify-between rounded-3xl border border-zinc-700 bg-zinc-800 bg-opacity-40 py-3 pl-5 font-thin text-zinc-400"
+				className="flex w-[10.5rem] flex-row items-center justify-between rounded-3xl border border-zinc-700 bg-zinc-800 bg-opacity-40 py-3 pl-5 font-thin text-zinc-400"
 			>
 				<RxCross1
 					className="cursor-pointer"
