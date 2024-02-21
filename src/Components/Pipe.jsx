@@ -51,20 +51,29 @@ const Pipe = () => {
 		<div
 			onDrop={handleDragEnd}
 			onDragOver={handleDragOver}
-			className="flex min-h-screen w-1/2 flex-col items-center justify-start"
+			className="flex h-full min-h-screen min-w-[15rem] max-w-[15rem] flex-col items-center justify-start overflow-y-scroll border-r border-r-zinc-700 bg-zinc-800 bg-opacity-40 px-3 text-sm duration-300"
 		>
-			{pipedBubbles.map((item, index) => (
-				<PipeBubble
-					key={item.id}
-					handleRemove={handleRemove}
-					index={index}
-					pipedBubbles={pipedBubbles}
-					handleBubbleDrop={handleBubbleDrop}
-					handleDragStart={handleDragStart}
-					title={item.title}
-					id={item.id}
-				/>
-			))}
+			<h1 className="my-10 text-xl font-thin text-zinc-400">
+				Your Stack
+			</h1>
+			{pipedBubbles.length === 0 ? (
+				<p className="font-sm flex h-full animate-fade items-center justify-center text-center font-thin text-zinc-400 animate-duration-300">
+					Drag & drop tools to create a stack
+				</p>
+			) : (
+				pipedBubbles.map((item, index) => (
+					<PipeBubble
+						key={item.id}
+						handleRemove={handleRemove}
+						index={index}
+						pipedBubbles={pipedBubbles}
+						handleBubbleDrop={handleBubbleDrop}
+						handleDragStart={handleDragStart}
+						title={item.title}
+						id={item.id}
+					/>
+				))
+			)}
 		</div>
 	);
 };

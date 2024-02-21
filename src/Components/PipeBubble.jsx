@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { v4 as uuidv4 } from "uuid";
-import { RxCross1 } from "react-icons/rx";
+import { RxCross1, RxDoubleArrowDown } from "react-icons/rx";
 
 const PipeBubble = ({
 	id,
@@ -50,30 +50,31 @@ const PipeBubble = ({
 			initial={{ opacity: 0, scale: 0 }}
 			animate={{ opacity: 1, scale: 1 }}
 			exit={{ opacity: 0, scale: 0 }}
-			transition={{ duration: 0.2 }}
+			transition={{ duration: 0.4 }}
 			layout
 			layoutId={id}
-			className="flex flex-row items-center justify-around"
+			className="flex flex-col items-center"
+			onDrop={handleDragEnd}
 		>
 			<div
-				onClick={() => {
-					handleRemove(id);
-				}}
-				className="m-5 flex cursor-pointer items-center justify-center rounded-3xl border border-zinc-700 bg-zinc-800 bg-opacity-40 p-2 text-zinc-700"
-			>
-				<RxCross1 />
-			</div>
-			<div
 				index={index}
-				onDrop={handleDragEnd}
 				draggable="true"
 				onDragStart={(e) =>
 					handleDragStart(e, { id: id, title: title, index: index })
 				}
-				className="rounded-3xl border border-zinc-700 bg-zinc-800 bg-opacity-40 px-5 py-3 font-thin text-zinc-400"
+				className="flex w-[10.5rem] flex-row items-center justify-between rounded-xl border border-zinc-700 bg-zinc-800 bg-opacity-40 py-3 pl-3 font-thin text-zinc-400"
 			>
-				{title}
+				<RxCross1
+					className="cursor-pointer duration-500 hover:scale-125 hover:text-red-400"
+					onClick={() => {
+						handleRemove(id);
+					}}
+				/>
+				<div className="flex-grow text-center">{title}</div>
 			</div>
+			<RxDoubleArrowDown
+				className={`my-5 text-xl text-zinc-400 duration-500 ${index != pipedBubbles.length - 1 ? "opacity-100" : "-translate-y-5 opacity-0"}`}
+			/>
 		</motion.div>
 	);
 };
