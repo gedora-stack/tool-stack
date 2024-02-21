@@ -44,7 +44,7 @@ const MockupPage = () => {
 	return (
 		<div className="flex h-screen flex-row items-start justify-between bg-zinc-900">
 			<Pipe />
-			<div className="flex h-full w-full flex-col items-center justify-start space-y-16 overflow-scroll py-20">
+			<div className="flex h-full w-full min-w-[32rem] flex-col items-center justify-start space-y-16 overflow-y-scroll py-20">
 				<Search
 					onChange={(e) => {
 						setSearchQuery(e.target.value);
