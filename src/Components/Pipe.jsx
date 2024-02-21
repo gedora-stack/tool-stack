@@ -51,8 +51,11 @@ const Pipe = () => {
 		<div
 			onDrop={handleDragEnd}
 			onDragOver={handleDragOver}
-			className="flex min-h-screen w-1/2 flex-col items-center justify-start"
+			className="flex h-full min-h-screen min-w-[15rem] max-w-[15rem] flex-col items-center justify-start overflow-y-scroll border-r border-r-zinc-700 bg-zinc-800 bg-opacity-40 px-6 text-sm"
 		>
+			<h1 className="my-10 text-xl font-thin text-zinc-400">
+				Your Stack
+			</h1>
 			{pipedBubbles.map((item, index) => (
 				<PipeBubble
 					key={item.id}

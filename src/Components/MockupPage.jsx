@@ -42,14 +42,15 @@ const MockupPage = () => {
 	);
 
 	return (
-		<div className="flex flex-row items-start justify-between bg-zinc-900 py-20">
-			<div className="flex min-h-screen w-3/5 flex-col items-center justify-start space-y-16">
+		<div className="flex h-screen flex-row items-start justify-between bg-zinc-900">
+			<Pipe />
+			<div className="flex h-full w-full flex-col items-center justify-start space-y-16 overflow-scroll py-20">
 				<Search
 					onChange={(e) => {
 						setSearchQuery(e.target.value);
 					}}
 				/>
-				<div className="grid w-10/12 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+				<div className="grid grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-3">
 					{filteredBubbles.map((item, index) => (
 						<Bubble
 							handleDragStart={handleDragStart}
@@ -61,7 +62,6 @@ const MockupPage = () => {
 					))}
 				</div>
 			</div>
-			<Pipe />
 		</div>
 	);
 };

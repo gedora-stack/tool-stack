@@ -53,26 +53,24 @@ const PipeBubble = ({
 			transition={{ duration: 0.2 }}
 			layout
 			layoutId={id}
-			className="flex flex-row items-center justify-around"
+			className="flex flex-row items-center justify-around py-6"
+			onDrop={handleDragEnd}
 		>
 			<div
-				onClick={() => {
-					handleRemove(id);
-				}}
-				className="m-5 flex cursor-pointer items-center justify-center rounded-3xl border border-zinc-700 bg-zinc-800 bg-opacity-40 p-2 text-zinc-700"
-			>
-				<RxCross1 />
-			</div>
-			<div
 				index={index}
-				onDrop={handleDragEnd}
 				draggable="true"
 				onDragStart={(e) =>
 					handleDragStart(e, { id: id, title: title, index: index })
 				}
-				className="rounded-3xl border border-zinc-700 bg-zinc-800 bg-opacity-40 px-5 py-3 font-thin text-zinc-400"
+				className="flex w-[12rem] flex-row items-center justify-between rounded-3xl border border-zinc-700 bg-zinc-800 bg-opacity-40 py-3 pl-5 font-thin text-zinc-400"
 			>
-				{title}
+				<RxCross1
+					className="cursor-pointer"
+					onClick={() => {
+						handleRemove(id);
+					}}
+				/>
+				<div className="flex-grow text-center">{title}</div>
 			</div>
 		</motion.div>
 	);
