@@ -1,23 +1,49 @@
 import React, { useState } from "react";
-import Bubble from "./Bubble";
-import { RxCross1 } from "react-icons/rx";
-import { RxArrowDown } from "react-icons/rx";
+import PipeBubble from "./PipeBubble";
+import { v4 as uuidv4 } from "uuid";
 
 const Pipe = () => {
 	const [pipedBubbles, setPipedBubbles] = useState([]);
 
+	//Adds mouse indicator when dragging over
 	const handleDragOver = (e) => {
 		e.preventDefault();
 	};
 
-	const handleDragEnd = (e) => {
-		const toolTitle = e.dataTransfer.getData("toolTitle");
-		setPipedBubbles([...pipedBubbles, { title: toolTitle }]);
+	//For piped bubbles, grabs the id, title and index in stack of the dragged bubble
+	const handleDragStart = (e, tool) => {
+		e.dataTransfer.setData("toolTitle", tool.title);
+		e.dataTransfer.setData("toolId", tool.id);
+		e.dataTransfer.setData("toolIndex", tool.index);
 	};
 
-	const handleRemove = (titleToRemove) => {
+	//When dropping, checks if bubble dropped is from the selection part, if it is, adds it to the end of array
+	//Changes the id to have a p in front, so we can differentiate piped and normal bubbles
+	//Also appends unique uuid, so we can have multiple of the same bubbles
+	const handleDragEnd = (e) => {
+		const toolTitle = e.dataTransfer.getData("toolTitle");
+		const toolId = e.dataTransfer.getData("toolId");
+
+		if (toolId.startsWith("s")) {
+			setPipedBubbles([
+				...pipedBubbles,
+				{
+					title: toolTitle,
+					id: toolId.replace("s", "p") + "-" + uuidv4(),
+				},
+			]);
+		}
+	};
+
+	//For sending as prop to pipeBubble component
+	const handleBubbleDrop = (updatedBubbles) => {
+		setPipedBubbles(updatedBubbles);
+	};
+
+	//Removes the bubble by id
+	const handleRemove = (idToRemove) => {
 		setPipedBubbles((prevBubbles) =>
-			prevBubbles.filter((item) => item.title !== titleToRemove),
+			prevBubbles.filter((item) => item.id !== idToRemove),
 		);
 	};
 
@@ -28,19 +54,16 @@ const Pipe = () => {
 			className="flex min-h-screen w-1/2 flex-col items-center justify-start"
 		>
 			{pipedBubbles.map((item, index) => (
-				<div className="flex flex-row items-center justify-around">
-					<div
-						onClick={() => handleRemove(item.title)}
-						className="m-5 flex h-10 w-10 cursor-pointer items-center justify-center rounded-xl border border-zinc-700 bg-zinc-800 bg-opacity-40 text-zinc-700"
-					>
-						<RxCross1 />
-					</div>
-					<Bubble
-						key={index}
-						title={item.title + " "}
-						icon={item.icon}
-					/>
-				</div>
+				<PipeBubble
+					key={item.id}
+					handleRemove={handleRemove}
+					index={index}
+					pipedBubbles={pipedBubbles}
+					handleBubbleDrop={handleBubbleDrop}
+					handleDragStart={handleDragStart}
+					title={item.title}
+					id={item.id}
+				/>
 			))}
 		</div>
 	);
