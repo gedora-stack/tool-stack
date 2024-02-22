@@ -87,28 +87,31 @@ const MockupPage = () => {
 	);
 
 	return (
-		<div className="flex h-screen flex-row items-start justify-between bg-zinc-900">
-			<Pipe />
-			<div className="flex h-full w-full min-w-[32rem] flex-col items-center justify-start space-y-16 overflow-y-scroll py-20">
-				<Search
-					onChange={(e) => {
-						setSearchQuery(e.target.value);
-					}}
-				/>
-				<div className="grid grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-3">
-					{filteredBubbles.map((item, index) => (
-						<Bubble
-							handleDragStart={handleDragStart}
-							key={item.id}
-							id={item.id}
-							title={item.title}
-							icon={item.icon}
-							description={item.description}
-						/>
-					))}
+		<>
+			<div className="absolute z-0 min-h-screen w-full  bg-[url('/wallpaper.jpg')] bg-cover"></div>
+			<div className="flex h-screen flex-row items-start justify-between bg-zinc-900">
+				<Pipe />
+				<div className="flex h-full w-full min-w-[32rem] flex-col items-center justify-start space-y-16 overflow-y-scroll py-20">
+					<Search
+						onChange={(e) => {
+							setSearchQuery(e.target.value);
+						}}
+					/>
+					<div className="grid grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-3">
+						{filteredBubbles.map((item, index) => (
+							<Bubble
+								handleDragStart={handleDragStart}
+								key={item.id}
+								id={item.id}
+								title={item.title}
+								icon={item.icon}
+								description={item.description}
+							/>
+						))}
+					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 
