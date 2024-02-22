@@ -51,7 +51,7 @@ const Pipe = () => {
 		<div
 			onDrop={handleDragEnd}
 			onDragOver={handleDragOver}
-			className="flex h-full min-h-screen min-w-[15rem] max-w-[15rem] flex-col items-center justify-start overflow-y-scroll border-r border-r-zinc-700 bg-zinc-800 bg-opacity-40 px-3 text-sm duration-300"
+			className="flex h-full min-h-screen min-w-[15rem] max-w-[15rem] flex-col items-center justify-start overflow-y-scroll border-r border-r-zinc-700 bg-zinc-900 px-3 text-sm duration-300"
 		>
 			<h1 className="my-10 text-xl font-thin text-zinc-400">
 				Your Stack

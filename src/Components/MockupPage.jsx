@@ -19,15 +19,60 @@ const MockupPage = () => {
 
 	//Array of tools with unique id
 	const [tools, setTools] = useState([
-		{ id: "s-001", title: "JSON Converter", icon: VscJson },
-		{ id: "s-002", title: "Text Compare  ", icon: VscTextSize },
-		{ id: "s-003", title: "Color Conversion", icon: VscSymbolColor },
-		{ id: "s-004", title: "Diff Viewer", icon: VscDiff },
-		{ id: "s-005", title: "Code Formatter", icon: VscCode },
-		{ id: "s-006", title: "Time Converter", icon: WiTime3 },
-		{ id: "s-007", title: "Base64 Encoder", icon: FiHash },
-		{ id: "s-008", title: "Hash Generator", icon: FiHash },
-		{ id: "s-009", title: "CSS Unit Converter", icon: PiFileCssLight },
+		{
+			id: "s-001",
+			title: "JSON Converter",
+			icon: VscJson,
+			description: "Convert JSON to XML, CSV, and more",
+		},
+		{
+			id: "s-002",
+			title: "Text Compare  ",
+			icon: VscTextSize,
+			description: "Compare two texts",
+		},
+		{
+			id: "s-003",
+			title: "Color Conversion",
+			icon: VscSymbolColor,
+			description: "Convert HEX, RGB, and HSL",
+		},
+		{
+			id: "s-004",
+			title: "Diff Viewer",
+			icon: VscDiff,
+			description: "Compare two files",
+		},
+		{
+			id: "s-005",
+			title: "Code Formatter",
+			icon: VscCode,
+			description: "Format your code",
+		},
+		{
+			id: "s-006",
+			title: "Time Converter",
+			icon: WiTime3,
+			description: "Convert time zones",
+		},
+		{
+			id: "s-007",
+			title: "Base64 Encoder",
+			icon: FiHash,
+			description: "Encode and decode base64",
+		},
+		{
+			id: "s-008",
+			title: "Hash Generator",
+			icon: FiHash,
+			description: "Generate hash",
+		},
+		{
+			id: "s-009",
+			title: "CSS Unit Converter",
+			icon: PiFileCssLight,
+			description: "Convert CSS units",
+		},
 	]);
 
 	//Grabs the title and the id when starting drag
@@ -58,6 +103,7 @@ const MockupPage = () => {
 							id={item.id}
 							title={item.title}
 							icon={item.icon}
+							description={item.description}
 						/>
 					))}
 				</div>
