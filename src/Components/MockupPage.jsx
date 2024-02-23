@@ -88,7 +88,6 @@ const MockupPage = () => {
 
 	return (
 		<>
-			<div className="absolute z-0 min-h-screen w-full  bg-[url('/wallpaper.jpg')] bg-cover"></div>
 			<div className="flex h-screen flex-row items-start justify-between bg-zinc-900">
 				<Pipe />
 				<div className="flex h-full w-full min-w-[32rem] flex-col items-center justify-start space-y-16 overflow-y-scroll py-20">
