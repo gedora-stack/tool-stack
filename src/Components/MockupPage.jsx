@@ -109,7 +109,6 @@ const MockupPage = () => {
 
 	return (
 		<>
-			<div className="absolute inset-0 h-screen w-full bg-zinc-900 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
 			<motion.div
 				animate={{
 					WebkitMaskPosition: `${mousePosition.x - maskSize / 2}px ${mousePosition.y - maskSize / 2}px`,
@@ -118,13 +117,15 @@ const MockupPage = () => {
 				transition={{
 					type: "tween",
 					ease: "backOut",
+					duration: 1,
 				}}
-				className="mask absolute inset-0 h-screen w-full bg-zinc-800 bg-opacity-40 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px]"
+				className="mask absolute inset-0 z-0 h-screen w-full bg-zinc-800 bg-opacity-40 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px]"
 			></motion.div>
 			<div className="flex h-screen flex-row items-start justify-between">
 				<Pipe updateMaskSize={updateMaskSize} />
-				<div className="flex h-full w-full min-w-[32rem] flex-col items-center justify-start space-y-16 overflow-y-scroll py-20">
+				<div className="z-20 flex h-full w-full min-w-[32rem] flex-col items-center justify-start space-y-16 overflow-y-scroll py-20">
 					<Search
+						updateMaskSize={updateMaskSize}
 						onChange={(e) => {
 							setSearchQuery(e.target.value);
 						}}
