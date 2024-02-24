@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import PipeBubble from "./PipeBubble";
 import { v4 as uuidv4 } from "uuid";
 
-const Pipe = () => {
+const Pipe = ({ updateMaskSize }) => {
 	const [pipedBubbles, setPipedBubbles] = useState([]);
 
 	//Adds mouse indicator when dragging over
 	const handleDragOver = (e) => {
 		e.preventDefault();
+		updateMaskSize(100);
 	};
 
 	//For piped bubbles, grabs the id, title and index in stack of the dragged bubble
@@ -49,6 +50,12 @@ const Pipe = () => {
 
 	return (
 		<div
+			onMouseEnter={() => {
+				updateMaskSize(100);
+			}}
+			onMouseLeave={() => {
+				updateMaskSize(200);
+			}}
 			onDrop={handleDragEnd}
 			onDragOver={handleDragOver}
 			className="z-10 flex h-full min-h-screen min-w-[15rem] max-w-[15rem] flex-col items-center justify-start overflow-y-scroll border-r border-r-zinc-700 bg-zinc-900 bg-opacity-50 px-3 text-sm duration-300"

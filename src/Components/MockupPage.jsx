@@ -12,10 +12,31 @@ import {
 import { WiTime3 } from "react-icons/wi";
 import { FiHash } from "react-icons/fi";
 import { PiFileCssLight } from "react-icons/pi";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 const MockupPage = () => {
 	const [searchQuery, setSearchQuery] = useState("");
+	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+	const [maskSize, setMaskSize] = useState(200);
+
+	const updateMousePosition = (e) => {
+		setMousePosition({ x: e.clientX, y: e.clientY });
+	};
+
+	const updateMaskSize = (size) => {
+		setMaskSize(size);
+	};
+
+	useEffect(() => {
+		document.body.addEventListener("mousemove", updateMousePosition);
+		document.body.addEventListener("dragover", updateMousePosition);
+
+		return () => {
+			document.body.removeEventListener("mousemove", updateMousePosition);
+			document.body.removeEventListener("dragover", updateMousePosition);
+		};
+	}, []);
 
 	//Array of tools with unique id
 	const [tools, setTools] = useState([
@@ -88,8 +109,20 @@ const MockupPage = () => {
 
 	return (
 		<>
-			<div className="flex h-screen flex-row items-start justify-between bg-zinc-900">
-				<Pipe />
+			<div className="absolute inset-0 h-screen w-full bg-zinc-900 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+			<motion.div
+				animate={{
+					WebkitMaskPosition: `${mousePosition.x - maskSize / 2}px ${mousePosition.y - maskSize / 2}px`,
+					WebkitMaskSize: `${maskSize}px`,
+				}}
+				transition={{
+					type: "tween",
+					ease: "backOut",
+				}}
+				className="mask absolute inset-0 h-screen w-full bg-zinc-800 bg-opacity-40 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px]"
+			></motion.div>
+			<div className="flex h-screen flex-row items-start justify-between">
+				<Pipe updateMaskSize={updateMaskSize} />
 				<div className="flex h-full w-full min-w-[32rem] flex-col items-center justify-start space-y-16 overflow-y-scroll py-20">
 					<Search
 						onChange={(e) => {

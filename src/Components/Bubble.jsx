@@ -23,15 +23,15 @@ const Bubble = ({ id, title, icon: Icon, handleDragStart, description }) => {
 				animate={{ opacity: 1 }}
 				exit={{ opacity: 0 }}
 				transition={{ duration: 0.3 }}
-				className="flex w-56 max-w-56 cursor-grab select-none flex-col items-center justify-center space-y-4 rounded-2xl border border-zinc-700 bg-zinc-800 bg-opacity-40 p-8 backdrop-blur-lg duration-100 active:cursor-grabbing active:outline-none"
+				className="flex w-56 max-w-56 cursor-grab select-none flex-col items-center justify-center space-y-4 rounded-2xl border border-zinc-700 bg-zinc-800 bg-opacity-40 p-8 backdrop-blur-lg duration-100"
 			>
 				{hovered ? (
-					<p className="mx-4 animate-fade text-center text-sm font-thin text-zinc-400">
+					<p className="mx-4 animate-fade text-center text-sm font-thin text-zinc-400 animate-duration-1000">
 						{description}
 					</p>
 				) : (
 					<div
-						className={`flex flex-col items-center space-y-6 ${hovered != null ? "animate-fade" : ""}`}
+						className={`flex flex-col items-center space-y-6 ${hovered != null ? "animate-fade animate-duration-1000" : ""}`}
 					>
 						{Icon && <Icon className="text-2xl text-zinc-400" />}
 						<h1 className="text-md text-center font-thin text-zinc-400">

@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+	background-color: #18181b;
+}
+
+.mask {
+	mask-image: url("circle.svg");
+	mask-repeat: no-repeat;
+}
+
 .container-snap::-webkit-scrollbar {
 	display: none;
 }
