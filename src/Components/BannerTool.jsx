@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { BsBoxArrowUpRight, BsPlusSquare } from "react-icons/bs";
 
@@ -10,9 +10,9 @@ const Styles = {
 	icon: "text-2xl text-zinc-400 duration-300 group-hover:opacity-0",
 	title: "text-md text-center font-thin text-zinc-400 duration-300 group-hover:-translate-y-14",
 	replaceControl:
-		"absolute font-thin w-full py-2 -top-1 flex flex-row items-center justify-center text-yellow-500 duration-300 opacity-0 -translate-y-12 group-hover:opacity-100 text-sm",
+		"absolute font-thin w-full py-2 -top-1 flex flex-row items-center justify-center text-yellow-500 -translate-y-12 text-sm",
 	addControl:
-		"absolute w-full bottom-3 py-2 font-thin flex flex-row items-center justify-center text-emerald-500 duration-300 opacity-0 translate-y-12 group-hover:opacity-100 text-sm",
+		"absolute w-full bottom-3 py-2 font-thin flex flex-row items-center justify-center text-emerald-500 translate-y-12 text-sm",
 	replaceIcon: "text-md ml-2",
 	addIcon: "text-md mr-2",
 };
@@ -26,11 +26,17 @@ const BannerTool = ({
 	handleQuickAdd,
 	handleSingleMode,
 }) => {
+	const [dragRemove, setDragRemove] = useState(false);
+
 	return (
 		<AnimatePresence mode="wait">
 			<motion.div
 				onDragStart={(e) => {
 					handleDragStart(e, { id: id, title: title });
+					setDragRemove(true);
+				}}
+				onDragEnd={() => {
+					setDragRemove(false);
 				}}
 				key={id}
 				draggable="true"
@@ -49,7 +55,7 @@ const BannerTool = ({
 					onClick={() => {
 						handleSingleMode({ id: id, title: title });
 					}}
-					className={Styles.replaceControl}
+					className={`${Styles.replaceControl} ${!dragRemove ? "opacity-0 duration-300 group-hover:opacity-100" : "opacity-0 duration-0 group-hover:opacity-0"}`}
 				>
 					Single mode
 					<BsBoxArrowUpRight className={Styles.replaceIcon} />
@@ -58,7 +64,7 @@ const BannerTool = ({
 					onClick={() => {
 						handleQuickAdd({ id: id, title: title });
 					}}
-					className={Styles.addControl}
+					className={`${Styles.addControl} ${!dragRemove ? "opacity-0 duration-300 group-hover:opacity-100" : "opacity-0 duration-0 group-hover:opacity-0"}`}
 				>
 					<BsPlusSquare className={Styles.addIcon} />
 					Quick add
