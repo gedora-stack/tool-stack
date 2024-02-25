@@ -10,11 +10,11 @@ const Styles = {
 	icon: "text-2xl text-zinc-400 duration-300 group-hover:opacity-0",
 	title: "text-md text-center font-thin text-zinc-400 duration-300 group-hover:-translate-y-14",
 	replaceControl:
-		"absolute font-thin -top-1.5 flex flex-row items-center justify-center text-zinc-600 duration-1000 opacity-0 group-hover:opacity-100 text-lg",
+		"absolute font-thin -top-1 flex flex-row items-center justify-center text-yellow-500 duration-300 opacity-0 -translate-y-10 group-hover:opacity-100 text-sm",
 	addControl:
-		"absolute bottom-2 font-thin flex flex-row items-center justify-center text-zinc-600 duration-1000 opacity-0 group-hover:opacity-100 text-lg",
-	replaceIcon: "text-lg ml-2",
-	addIcon: "text-lg mr-2",
+		"absolute bottom-3 font-thin flex flex-row items-center justify-center text-emerald-500 duration-300 opacity-0 translate-y-10 group-hover:opacity-100 text-sm",
+	replaceIcon: "text-md ml-2",
+	addIcon: "text-md mr-2",
 };
 
 const BannerTool = ({
