@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PipeBubble from "./PipeBubble";
 import { v4 as uuidv4 } from "uuid";
 
-const Pipe = () => {
+const Pipe = ({ updateMaskSize }) => {
 	const [pipedBubbles, setPipedBubbles] = useState([]);
 	const [helper, setHelper] = useState(false);
 
