@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Search from "./Search";
 import Sidebar from "./Sidebar";
 import {
@@ -87,6 +87,13 @@ const App = () => {
 			description: "Convert CSS units",
 		},
 	]);
+
+	//Checks if stack empty and shows banner page
+	useEffect(() => {
+		if (stackedTools.length == 0) {
+			setDeployed(false);
+		}
+	}, [stackedTools]);
 
 	//Grabs the title and the id when starting drag
 	const handleDragStart = (e, tool) => {
