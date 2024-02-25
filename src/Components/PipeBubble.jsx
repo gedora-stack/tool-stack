@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { v4 as uuidv4 } from "uuid";
-import { RxCross1, RxDoubleArrowDown } from "react-icons/rx";
+import { RxCross1, RxArrowDown } from "react-icons/rx";
+import { BsChevronDown } from "react-icons/bs";
+import { HiChevronUpDown } from "react-icons/hi2";
 
 const PipeBubble = ({
 	id,
@@ -11,10 +13,15 @@ const PipeBubble = ({
 	pipedBubbles,
 	index,
 	handleRemove,
+	setHelper,
 }) => {
+	const [exchange, setExchange] = useState(false);
+
 	//When dropping piped bubble on a piped bubble, remove the bubble that is being dropped, then add the dropped bubble
 	//at the index of the bubble that it is being dropped on
 	const handleDragEnd = (e) => {
+		setHelper(false);
+		setExchange(false);
 		e.stopPropagation();
 
 		const toolIndex = e.dataTransfer.getData("toolIndex");
@@ -26,7 +33,7 @@ const PipeBubble = ({
 
 			slicedBubbles.splice(parseInt(toolIndex, 10), 1);
 
-			slicedBubbles.splice(index, 0, {
+			slicedBubbles.splice(index + 1, 0, {
 				title: toolTitle,
 				id: toolId,
 			});
@@ -35,7 +42,7 @@ const PipeBubble = ({
 		} else if (toolId.startsWith("s")) {
 			const slicedBubbles = [...pipedBubbles];
 
-			slicedBubbles.splice(index, 0, {
+			slicedBubbles.splice(index + 1, 0, {
 				title: toolTitle,
 				id: toolId.replace("s", "p") + "-" + uuidv4(),
 			});
@@ -50,11 +57,19 @@ const PipeBubble = ({
 			initial={{ opacity: 0, scale: 0 }}
 			animate={{ opacity: 1, scale: 1 }}
 			exit={{ opacity: 0, scale: 0 }}
-			transition={{ duration: 0.4 }}
+			transition={{ duration: 0.2 }}
 			layout
 			layoutId={id}
 			className="flex flex-col items-center"
 			onDrop={handleDragEnd}
+			onDragOver={(e) => {
+				e.preventDefault();
+				setExchange(true);
+			}}
+			onDragLeave={(e) => {
+				e.preventDefault();
+				setExchange(false);
+			}}
 		>
 			<div
 				index={index}
@@ -70,10 +85,10 @@ const PipeBubble = ({
 						handleRemove(id);
 					}}
 				/>
-				<div className="flex-grow text-center">{title}</div>
+				<div className={`flex-grow text-center`}>{title}</div>
 			</div>
-			<RxDoubleArrowDown
-				className={`my-5 text-xl text-zinc-400 duration-500 ${index != pipedBubbles.length - 1 ? "opacity-100" : "-translate-y-5 opacity-0"}`}
+			<BsChevronDown
+				className={`text-lg text-zinc-400 duration-500 ${exchange ? "mb-16 mt-3" : "my-3 "} ${index != pipedBubbles.length - 1 ? "opacity-100" : "-translate-y-5 opacity-0"}`}
 			/>
 		</motion.div>
 	);
