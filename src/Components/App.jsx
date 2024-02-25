@@ -22,7 +22,7 @@ const Styles = {
 	bannerContainer:
 		"flex h-full w-full min-w-[32rem] flex-col items-center justify-start pt-[8vh]",
 	bannerGrid:
-		"container-snap grid grid-cols-1 gap-12 overflow-y-scroll pb-14 pt-28 lg:grid-cols-2 xl:grid-cols-3",
+		"container-snap grid grid-cols-1 gap-16 overflow-y-scroll pb-14 pt-28 lg:grid-cols-2 xl:grid-cols-3",
 };
 
 const App = () => {
