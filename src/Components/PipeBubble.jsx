@@ -13,6 +13,7 @@ const PipeBubble = ({
 	index,
 	handleRemove,
 	setHelper,
+	setExchangeIndicator,
 }) => {
 	const [exchange, setExchange] = useState(false);
 
@@ -76,6 +77,10 @@ const PipeBubble = ({
 				onDragStart={(e) =>
 					handleDragStart(e, { id: id, title: title, index: index })
 				}
+				onDragEnd={(e) => {
+					e.preventDefault();
+					setExchangeIndicator(false);
+				}}
 				className="flex w-[10.5rem] cursor-grab flex-row items-center justify-between rounded-xl border border-zinc-700 bg-zinc-800 bg-opacity-40 py-3 pl-3 font-thin text-zinc-400"
 			>
 				<RxCross1

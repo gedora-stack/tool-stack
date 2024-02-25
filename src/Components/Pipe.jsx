@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import PipeBubble from "./PipeBubble";
 import { v4 as uuidv4 } from "uuid";
+import { BsFillPlusCircleFill } from "react-icons/bs";
 
-const Pipe = ({ updateMaskSize }) => {
+const Pipe = () => {
 	const [pipedBubbles, setPipedBubbles] = useState([]);
 	const [helper, setHelper] = useState(false);
+	const [exchangeIndicator, setExchangeIndicator] = useState(false);
 
 	//For piped bubbles, grabs the id, title and index in stack of the dragged bubble
 	const handleDragStart = (e, tool) => {
+		setExchangeIndicator(true);
 		e.dataTransfer.setData("toolTitle", tool.title);
 		e.dataTransfer.setData("toolId", tool.id);
 		e.dataTransfer.setData("toolIndex", tool.index);
@@ -18,6 +21,7 @@ const Pipe = ({ updateMaskSize }) => {
 	//Also appends unique uuid, so we can have multiple of the same bubbles
 	const handleDragEnd = (e) => {
 		setHelper(false);
+		setExchangeIndicator(false);
 		const toolTitle = e.dataTransfer.getData("toolTitle");
 		const toolId = e.dataTransfer.getData("toolId");
 
@@ -54,7 +58,7 @@ const Pipe = ({ updateMaskSize }) => {
 			onDragLeave={() => {
 				setHelper(false);
 			}}
-			className={`z-10 flex h-[84vh] min-w-[15rem] max-w-[15rem] flex-col items-center justify-start rounded-r-2xl border-y border-r border-y-zinc-700 border-r-zinc-700 ${helper ? "bg-opacity-70" : "bg-opacity-40"} bg-zinc-800 px-3 text-sm duration-500`}
+			className={`relative z-10 flex h-[84vh] min-w-[15rem] max-w-[15rem] flex-col items-center justify-start rounded-r-2xl border-y border-r border-y-zinc-700 border-r-zinc-700 bg-zinc-800 bg-opacity-40 px-3 text-sm duration-500`}
 		>
 			<h1 className="mb-4 mt-6 text-xl font-thin text-zinc-400">
 				Your Stack
@@ -67,6 +71,7 @@ const Pipe = ({ updateMaskSize }) => {
 				) : (
 					pipedBubbles.map((item, index) => (
 						<PipeBubble
+							setExchangeIndicator={setExchangeIndicator}
 							key={item.id}
 							setHelper={setHelper}
 							handleRemove={handleRemove}
@@ -79,6 +84,11 @@ const Pipe = ({ updateMaskSize }) => {
 						/>
 					))
 				)}
+			</div>
+			<div
+				className={`absolute -right-14 top-1/2 text-3xl text-emerald-600 ${helper && !exchangeIndicator ? "-translate-x-3 rotate-0 opacity-100" : "translate-x-0 rotate-90 opacity-0"} duration-300`}
+			>
+				<BsFillPlusCircleFill />
 			</div>
 		</div>
 	);
