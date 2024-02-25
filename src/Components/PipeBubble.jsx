@@ -81,10 +81,10 @@ const PipeBubble = ({
 					e.preventDefault();
 					setExchangeIndicator(false);
 				}}
-				className="flex w-[10.5rem] cursor-grab flex-row items-center justify-between rounded-xl border border-zinc-700 bg-zinc-800 bg-opacity-40 py-3 pl-3 font-thin text-zinc-400"
+				className="test-parent flex w-[10.5rem] cursor-grab flex-row items-center justify-between rounded-xl border border-zinc-700 bg-zinc-800 bg-opacity-40 py-3 pl-3 font-thin text-zinc-400"
 			>
 				<RxCross1
-					className="cursor-pointer duration-500 hover:scale-125 hover:text-red-400"
+					className="test-child cursor-pointer duration-500 hover:scale-125 hover:text-red-400"
 					onClick={() => {
 						handleRemove(id);
 					}}

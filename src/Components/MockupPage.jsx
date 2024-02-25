@@ -13,9 +13,12 @@ import { WiTime3 } from "react-icons/wi";
 import { FiHash } from "react-icons/fi";
 import { PiFileCssLight } from "react-icons/pi";
 import { useState } from "react";
+import Stack from "./Stack";
 
 const MockupPage = () => {
 	const [searchQuery, setSearchQuery] = useState("");
+	const [deployed, setDeployed] = useState(false);
+	const [pipedBubbles, setPipedBubbles] = useState([]);
 
 	//Array of tools with unique id
 	const [tools, setTools] = useState([
@@ -89,25 +92,38 @@ const MockupPage = () => {
 	return (
 		<>
 			<div className="flex h-screen flex-row items-center justify-between overflow-y-hidden bg-zinc-900">
-				<Pipe />
+				<Pipe
+					setDeployed={setDeployed}
+					deployed={deployed}
+					pipedBubbles={pipedBubbles}
+					setPipedBubbles={setPipedBubbles}
+				/>
 				<div className="flex h-full w-full min-w-[32rem] flex-col items-center justify-start pt-[8vh]">
-					<Search
-						onChange={(e) => {
-							setSearchQuery(e.target.value);
-						}}
-					/>
-					<div className="container-snap grid grid-cols-1 gap-12 overflow-y-scroll pb-14 pt-28 lg:grid-cols-2 xl:grid-cols-3">
-						{filteredBubbles.map((item, index) => (
-							<Bubble
-								handleDragStart={handleDragStart}
-								key={item.id}
-								id={item.id}
-								title={item.title}
-								icon={item.icon}
-								description={item.description}
+					{deployed ? (
+						<>
+							<Stack pipedBubbles={pipedBubbles} />
+						</>
+					) : (
+						<>
+							<Search
+								onChange={(e) => {
+									setSearchQuery(e.target.value);
+								}}
 							/>
-						))}
-					</div>
+							<div className="container-snap grid grid-cols-1 gap-12 overflow-y-scroll pb-14 pt-28 lg:grid-cols-2 xl:grid-cols-3">
+								{filteredBubbles.map((item, index) => (
+									<Bubble
+										handleDragStart={handleDragStart}
+										key={item.id}
+										id={item.id}
+										title={item.title}
+										icon={item.icon}
+										description={item.description}
+									/>
+								))}
+							</div>
+						</>
+					)}
 				</div>
 			</div>
 		</>

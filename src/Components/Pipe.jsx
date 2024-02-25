@@ -3,8 +3,7 @@ import PipeBubble from "./PipeBubble";
 import { v4 as uuidv4 } from "uuid";
 import { BsFillPlusCircleFill } from "react-icons/bs";
 
-const Pipe = () => {
-	const [pipedBubbles, setPipedBubbles] = useState([]);
+const Pipe = ({ setDeployed, deployed, pipedBubbles, setPipedBubbles }) => {
 	const [helper, setHelper] = useState(false);
 	const [exchangeIndicator, setExchangeIndicator] = useState(false);
 
@@ -60,10 +59,8 @@ const Pipe = () => {
 			}}
 			className={`relative z-10 flex h-[84vh] min-w-[15rem] max-w-[15rem] flex-col items-center justify-start rounded-r-2xl border-y border-r border-y-zinc-700 border-r-zinc-700 bg-zinc-800 bg-opacity-40 px-3 text-sm duration-500`}
 		>
-			<h1 className="mb-4 mt-6 text-xl font-thin text-zinc-400">
-				Your Stack
-			</h1>
-			<div className="container-snap w-[12rem] overflow-y-scroll border-t border-t-zinc-700 pt-6">
+			<h1 className="my-4 text-xl font-thin text-zinc-400">Your Stack</h1>
+			<div className="container-snap h-full w-[12rem] overflow-y-scroll border-b border-t border-b-zinc-700 border-t-zinc-700 py-6">
 				{pipedBubbles.length === 0 ? (
 					<p className="font-sm flex h-full animate-fade items-center justify-center text-center font-thin text-zinc-500 animate-duration-300">
 						Drag & drop tools to create a stack
@@ -90,6 +87,14 @@ const Pipe = () => {
 			>
 				<BsFillPlusCircleFill />
 			</div>
+			<button
+				onClick={() => {
+					setDeployed(!deployed);
+				}}
+				className="my-4 rounded-lg border border-zinc-700 px-4 py-1 text-xl font-thin text-zinc-400"
+			>
+				{deployed ? "ADD" : "DEPLOY"}
+			</button>
 		</div>
 	);
 };
