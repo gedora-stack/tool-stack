@@ -14,6 +14,7 @@ import { PiFileCssLight } from "react-icons/pi";
 import { useState } from "react";
 import Stack from "./Stack";
 import BannerTool from "./BannerTool";
+import { v4 as uuidv4 } from "uuid";
 
 const Styles = {
 	mainContainer:
@@ -98,6 +99,26 @@ const App = () => {
 		tool.title.toLowerCase().includes(searchQuery.toLowerCase()),
 	);
 
+	const handleQuickAdd = (tool) => {
+		setStackedTools([
+			...stackedTools,
+			{
+				title: tool.title,
+				id: tool.id.replace("b", "s") + "-" + uuidv4(),
+			},
+		]);
+	};
+
+	const handleSingleMode = (tool) => {
+		setStackedTools([
+			{
+				title: tool.title,
+				id: tool.id.replace("b", "s") + "-" + uuidv4(),
+			},
+		]);
+		setDeployed(true);
+	};
+
 	return (
 		<>
 			<div className={Styles.mainContainer}>
@@ -122,6 +143,8 @@ const App = () => {
 							<div className={Styles.bannerGrid}>
 								{filteredTools.map((tool, index) => (
 									<BannerTool
+										handleSingleMode={handleSingleMode}
+										handleQuickAdd={handleQuickAdd}
 										handleDragStart={handleDragStart}
 										key={tool.id}
 										id={tool.id}

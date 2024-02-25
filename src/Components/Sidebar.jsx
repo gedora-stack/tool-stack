@@ -107,7 +107,7 @@ const Sidebar = ({ setDeployed, deployed, stackedTools, setStackedTools }) => {
 				}}
 				className={Styles.sidebarButton}
 			>
-				{deployed ? "ADD" : "DEPLOY"}
+				{deployed ? "Add" : "Deploy"}
 			</button>
 		</div>
 	);

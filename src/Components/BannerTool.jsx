@@ -1,5 +1,6 @@
 import React from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { BsBoxArrowUpRight, BsPlusSquare } from "react-icons/bs";
 
 const Styles = {
 	container:
@@ -8,6 +9,10 @@ const Styles = {
 		"absolute w-40 text-center text-sm font-thin text-zinc-500 opacity-0 duration-300 group-hover:translate-y-6 group-hover:opacity-100",
 	icon: "text-2xl text-zinc-400 duration-300 group-hover:opacity-0",
 	title: "text-md text-center font-thin text-zinc-400 duration-300 group-hover:-translate-y-14",
+	replaceIcon:
+		"absolute -top-1 right-3 text-zinc-600 duration-1000 opacity-0 group-hover:opacity-100 text-lg",
+	addIcon:
+		"absolute bottom-3 left-3 text-zinc-600 duration-1000 opacity-0 group-hover:opacity-100 text-lg",
 };
 
 const BannerTool = ({
@@ -16,6 +21,8 @@ const BannerTool = ({
 	icon: Icon,
 	handleDragStart,
 	description,
+	handleQuickAdd,
+	handleSingleMode,
 }) => {
 	return (
 		<AnimatePresence mode="wait">
@@ -36,6 +43,18 @@ const BannerTool = ({
 					{Icon && <Icon className={Styles.icon} />}
 					<h1 className={Styles.title}>{title}</h1>
 				</div>
+				<BsBoxArrowUpRight
+					onClick={() => {
+						handleSingleMode({ id: id, title: title });
+					}}
+					className={Styles.replaceIcon}
+				/>
+				<BsPlusSquare
+					onClick={() => {
+						handleQuickAdd({ id: id, title: title });
+					}}
+					className={Styles.addIcon}
+				/>
 			</motion.div>
 		</AnimatePresence>
 	);
