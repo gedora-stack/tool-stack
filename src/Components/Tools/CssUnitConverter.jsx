@@ -1,13 +1,13 @@
 import React from "react";
 
-const CssUnitConverter = ({ input, output, setOutput, index }) => {
+const CssUnitConverter = ({ index, input, setOutput }) => {
 	return (
 		<div
 			onClick={() => {
-				setOutput(input, index);
+				setOutput(input ? input : "CssUnitConverter", index);
 			}}
 		>
-			CssUnitConverter {input} {output}
+			CssUnitConverter INPUT:{input}
 		</div>
 	);
 };

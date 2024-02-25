@@ -1,13 +1,13 @@
 import React from "react";
 
-const ColorConversion = ({ input, output, index, setOutput }) => {
+const ColorConversion = ({ index, input, setOutput }) => {
 	return (
 		<div
 			onClick={() => {
-				setOutput(input, index);
+				setOutput(input ? input : "ColorConversion", index);
 			}}
 		>
-			ColorConversion {input} {output}
+			ColorConversion INPUT:{input}
 		</div>
 	);
 };

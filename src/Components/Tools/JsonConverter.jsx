@@ -1,13 +1,13 @@
 import React from "react";
 
-const JsonConverter = ({ input, output, index, setOutput }) => {
+const JsonConverter = ({ index, input, setOutput }) => {
 	return (
 		<div
 			onClick={() => {
-				setOutput(input, index);
+				setOutput(input ? input : "JsonConverter", index);
 			}}
 		>
-			JsonConverter {input} {output}
+			JsonConverter INPUT:{input}
 		</div>
 	);
 };

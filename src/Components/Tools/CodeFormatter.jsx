@@ -1,13 +1,13 @@
 import React from "react";
 
-const CodeFormatter = ({ input, output, index, setOutput }) => {
+const CodeFormatter = ({ index, input, setOutput }) => {
 	return (
 		<div
 			onClick={() => {
-				setOutput(input, index);
+				setOutput(input ? input : "CodeFormatter", index);
 			}}
 		>
-			CodeFormatter {input} {output}
+			CodeFormatter INPUT:{input}
 		</div>
 	);
 };

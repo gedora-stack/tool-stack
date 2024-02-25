@@ -1,13 +1,13 @@
 import React from "react";
 
-const Base64Encoder = ({ input, output, setOutput, index }) => {
+const Base64Encoder = ({ index, input, setOutput }) => {
 	return (
 		<div
 			onClick={() => {
-				setOutput("keee", index);
+				setOutput(input ? input : "Base64Encoder", index);
 			}}
 		>
-			Base64Encoder {input} {output}
+			Base64Encoder INPUT:{input}
 		</div>
 	);
 };

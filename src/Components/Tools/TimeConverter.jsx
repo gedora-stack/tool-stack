@@ -1,13 +1,13 @@
 import React from "react";
 
-const TimeConverter = ({ input, output, index, setOutput }) => {
+const TimeConverter = ({ index, input, setOutput }) => {
 	return (
 		<div
 			onClick={() => {
-				setOutput(input, index);
+				setOutput(input ? input : "TimeConverter", index);
 			}}
 		>
-			TimeConverter {input} {output}
+			TimeConverter INPUT:{input}
 		</div>
 	);
 };

@@ -1,13 +1,13 @@
 import React from "react";
 
-const DiffViewer = ({ input, output, setOutput, index }) => {
+const DiffViewer = ({ index, input, setOutput }) => {
 	return (
 		<div
 			onClick={() => {
-				setOutput(input, index);
+				setOutput(input ? input : "DiffViewer", index);
 			}}
 		>
-			DiffViewer {input} {output}
+			DiffViewer INPUT:{input}
 		</div>
 	);
 };

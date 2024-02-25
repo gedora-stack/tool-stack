@@ -1,13 +1,13 @@
 import React from "react";
 
-const TextCompare = ({ input, output, index, setOutput }) => {
+const TextCompare = ({ index, input, setOutput }) => {
 	return (
 		<div
 			onClick={() => {
-				setOutput(input, index);
+				setOutput(input ? input : "TextCompare", index);
 			}}
 		>
-			TextCompare {input} {output}
+			TextCompare INPUT:{input}
 		</div>
 	);
 };

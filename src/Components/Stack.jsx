@@ -1,32 +1,33 @@
 import React, { useEffect, useState } from "react";
 import * as tools from "./Tools/Tools.js";
 
-const componentMap = {
-	"p-001": tools.JsonConverter,
-	"p-002": tools.TextCompare,
-	"p-003": tools.ColorConversion,
-	"p-004": tools.DiffViewer,
-	"p-005": tools.CodeFormatter,
-	"p-006": tools.TimeConverter,
-	"p-007": tools.Base64Encoder,
-	"p-008": tools.HashGenerator,
-	"p-009": tools.CssUnitConverter,
+const toolMap = {
+	"s-001": tools.JsonConverter,
+	"s-002": tools.TextCompare,
+	"s-003": tools.ColorConversion,
+	"s-004": tools.DiffViewer,
+	"s-005": tools.CodeFormatter,
+	"s-006": tools.TimeConverter,
+	"s-007": tools.Base64Encoder,
+	"s-008": tools.HashGenerator,
+	"s-009": tools.CssUnitConverter,
 };
 
-const Stack = ({ pipedBubbles }) => {
+const Stack = ({ stackedTools }) => {
 	const [tools, setTools] = useState([]);
 
+	//Renders corresponding components for tools in array, updated when array changed
 	useEffect(() => {
-		const updatedTools = pipedBubbles.map((bubble, index) => ({
+		const updatedTools = stackedTools.map((tool, index) => ({
 			index: index,
-			id: bubble.id,
+			id: tool.id,
 			input: "",
-			output: "",
 		}));
 		setTools(updatedTools);
-	}, [pipedBubbles]);
+	}, [stackedTools]);
 
-	const setPipe = (output, index) => {
+	//For propagating outputs to tools in stack, makes the output of the current tool and input of the next tool by index in array
+	const setPropagation = (output, index) => {
 		setTools((prevTools) => {
 			return prevTools.map((tool) => {
 				if (tool.index === index + 1) {
@@ -41,15 +42,14 @@ const Stack = ({ pipedBubbles }) => {
 	return (
 		<div>
 			{tools.map((tool, index) => {
-				const DynamicComponent = componentMap[tool.id.substring(0, 5)];
+				const ToolComponent = toolMap[tool.id.substring(0, 5)];
 
-				if (DynamicComponent) {
+				if (ToolComponent) {
 					return (
-						<DynamicComponent
+						<ToolComponent
 							key={index}
 							input={tool.input}
-							output={tool.output}
-							setOutput={setPipe}
+							setOutput={setPropagation}
 							index={index}
 						/>
 					);
