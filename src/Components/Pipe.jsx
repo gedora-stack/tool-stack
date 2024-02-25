@@ -54,28 +54,32 @@ const Pipe = ({ updateMaskSize }) => {
 			onDragLeave={() => {
 				setHelper(false);
 			}}
-			className={`z-10 flex h-[84vh] min-w-[15rem] max-w-[15rem] flex-col items-center justify-start overflow-y-scroll rounded-r-2xl border-y border-r border-y-zinc-700 border-r-zinc-700 ${helper ? "bg-opacity-70" : "bg-opacity-40"} bg-zinc-800 px-3 text-sm duration-500`}
+			className={`z-10 flex h-[84vh] min-w-[15rem] max-w-[15rem] flex-col items-center justify-start rounded-r-2xl border-y border-r border-y-zinc-700 border-r-zinc-700 ${helper ? "bg-opacity-70" : "bg-opacity-40"} bg-zinc-800 px-3 text-sm duration-500`}
 		>
-			<h1 className="my-8 text-xl font-thin text-zinc-400">Your Stack</h1>
-			{pipedBubbles.length === 0 ? (
-				<p className="font-sm flex h-full animate-fade items-center justify-center text-center font-thin text-zinc-500 animate-duration-300">
-					Drag & drop tools to create a stack
-				</p>
-			) : (
-				pipedBubbles.map((item, index) => (
-					<PipeBubble
-						key={item.id}
-						setHelper={setHelper}
-						handleRemove={handleRemove}
-						index={index}
-						pipedBubbles={pipedBubbles}
-						handleBubbleDrop={handleBubbleDrop}
-						handleDragStart={handleDragStart}
-						title={item.title}
-						id={item.id}
-					/>
-				))
-			)}
+			<h1 className="mb-4 mt-6 text-xl font-thin text-zinc-400">
+				Your Stack
+			</h1>
+			<div className="container-snap w-[12rem] overflow-y-scroll border-t border-t-zinc-700 pt-6">
+				{pipedBubbles.length === 0 ? (
+					<p className="font-sm flex h-full animate-fade items-center justify-center text-center font-thin text-zinc-500 animate-duration-300">
+						Drag & drop tools to create a stack
+					</p>
+				) : (
+					pipedBubbles.map((item, index) => (
+						<PipeBubble
+							key={item.id}
+							setHelper={setHelper}
+							handleRemove={handleRemove}
+							index={index}
+							pipedBubbles={pipedBubbles}
+							handleBubbleDrop={handleBubbleDrop}
+							handleDragStart={handleDragStart}
+							title={item.title}
+							id={item.id}
+						/>
+					))
+				)}
+			</div>
 		</div>
 	);
 };
