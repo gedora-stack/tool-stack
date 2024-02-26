@@ -26,7 +26,7 @@ const Styles = {
 	bannerGrid:
 		"container-snap max-h-screen px-4 masked-overflow grid grid-cols-1 gap-16 py-20 overflow-y-scroll lg:grid-cols-2 xl:grid-cols-3",
 	stackContainer:
-		"px-20 w-full h-full flex items-center flex-col overflow-y-scroll",
+		"px-20 w-full h-full flex items-center flex-col overflow-y-scroll py-[8vh]",
 };
 
 const App = () => {

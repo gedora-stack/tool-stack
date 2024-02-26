@@ -40,7 +40,7 @@ const Stack = ({ stackedTools }) => {
 	};
 
 	return (
-		<div>
+		<div className="space-y-16">
 			{tools.map((tool, index) => {
 				const ToolComponent = toolMap[tool.id.substring(0, 5)];
 
