@@ -1,6 +1,6 @@
 import Base64Encoder from "./Base64Encoder";
 import JsonConverter from "./JsonConverter";
-import TextCompare from "./TextCompare";
+import CaseFormatter from "./CaseFormatter";
 import ColorConversion from "./ColorConversion";
 import DiffViewer from "./DiffViewer";
 import CodeFormatter from "./CodeFormatter";
@@ -11,7 +11,7 @@ import CssUnitConverter from "./CssUnitConverter";
 export {
 	Base64Encoder,
 	JsonConverter,
-	TextCompare,
+	CaseFormatter,
 	ColorConversion,
 	DiffViewer,
 	CodeFormatter,

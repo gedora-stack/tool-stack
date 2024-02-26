@@ -14,7 +14,7 @@ const Styles = {
 	additionHelper:
 		"absolute -right-14 top-1/2 text-3xl text-emerald-600 duration-300",
 	sidebarButton:
-		"my-4 rounded-lg animate-jump border border-zinc-700 px-4 py-1 text-xl font-thin text-zinc-400 duration-300 cursor-pointer",
+		"my-4 rounded-lg animate-fade border border-zinc-700 px-4 py-1 text-xl font-thin text-zinc-400 duration-300 cursor-pointer",
 };
 
 const Sidebar = ({ setDeployed, deployed, stackedTools, setStackedTools }) => {

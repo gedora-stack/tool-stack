@@ -19,10 +19,11 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const Styles = {
 	pageContainer:
-		"flex h-screen flex-row items-center w-full justify-between bg-zinc-900",
-	mainContainer: "flex w-full h-screen flex-col items-center justify-center",
+		"flex h-screen flex-row items-center w-full overflow-y-hidden justify-between bg-zinc-900",
+	mainContainer:
+		"flex w-full min-w-[32rem] h-screen flex-col items-center justify-center",
 	bannerContainer:
-		"flex h-full w-full min-w-[32rem] flex-col items-center justify-start pt-[8vh]",
+		"flex h-full w-full flex-col items-center justify-start pt-[8vh]",
 	bannerGrid:
 		"container-snap max-h-screen px-4 masked-overflow grid grid-cols-1 gap-16 py-20 overflow-y-scroll lg:grid-cols-2 xl:grid-cols-3",
 	stackContainer:
@@ -45,9 +46,9 @@ const App = () => {
 		},
 		{
 			id: "b-002",
-			title: "Text Compare  ",
+			title: "Case Formatter",
 			icon: VscTextSize,
-			description: "Compare two texts",
+			description: "Format text case",
 		},
 		{
 			id: "b-003",

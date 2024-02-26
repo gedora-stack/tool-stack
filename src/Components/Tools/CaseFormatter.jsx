@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import CryptoJS from "crypto-js";
 
 const Styles = {
 	mainContainer:
@@ -12,30 +11,27 @@ const Styles = {
 		"font-thin text-zinc-400 mr-6 bg-zinc-800 p-3 rounded-3xl border border-zinc-700",
 };
 
-const HashGenerator = ({ id, index, input, setOutput }) => {
+const CaseFormatter = ({ id, index, input, setOutput }) => {
 	const [localInput, setLocalInput] = useState("");
-	const [outputMD5, setOutputMD5] = useState("");
-	const [outputSHA1, setOutputSHA1] = useState("");
+	const [outputLowercase, setOutputLowercase] = useState("");
+	const [outputUppercase, setOutputUppercase] = useState("");
 
-	const hashInput = (plain) => {
-		const md5Hash = CryptoJS.MD5(plain).toString(CryptoJS.enc.Hex);
-		const sha1Hash = CryptoJS.SHA1(plain).toString(CryptoJS.enc.Hex);
-
-		setOutputMD5(md5Hash);
-		setOutputSHA1(sha1Hash);
+	const convertInput = (plain) => {
+		setOutputLowercase(plain.toLowerCase());
+		setOutputUppercase(plain.toUpperCase());
 	};
 
 	return (
 		<div className={Styles.mainContainer}>
-			<h1 className={Styles.title}>Hash Generator</h1>
+			<h1 className={Styles.title}>Case Formatter</h1>
 			<div className={Styles.inputContainer}>
 				<button
 					onClick={() => {
-						hashInput(input ? input : localInput);
+						convertInput(input ? input : localInput);
 					}}
 					className={Styles.actionButton}
 				>
-					Hash
+					Convert
 				</button>
 				<input
 					value={input ? input : localInput}
@@ -49,14 +45,14 @@ const HashGenerator = ({ id, index, input, setOutput }) => {
 			<div className={Styles.inputContainer}>
 				<p
 					onClick={() => {
-						setOutput(outputMD5, index);
+						setOutput(outputUppercase, index);
 					}}
 					className={Styles.heading}
 				>
-					MD5
+					UPPERCASE
 				</p>
 				<input
-					value={outputMD5}
+					value={outputUppercase}
 					readOnly
 					className={Styles.input}
 				></input>
@@ -65,15 +61,15 @@ const HashGenerator = ({ id, index, input, setOutput }) => {
 			<div className={Styles.inputContainer}>
 				<p
 					onClick={() => {
-						setOutput(outputSHA1, index);
+						setOutput(outputLowercase, index);
 					}}
 					className={Styles.heading}
 				>
-					SHA1
+					lowercase
 				</p>
 				<input
 					readOnly
-					value={outputSHA1}
+					value={outputLowercase}
 					className={Styles.input}
 				></input>
 			</div>
@@ -81,4 +77,4 @@ const HashGenerator = ({ id, index, input, setOutput }) => {
 	);
 };
 
-export default HashGenerator;
+export default CaseFormatter;

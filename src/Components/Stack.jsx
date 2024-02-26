@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import * as tools from "./Tools/Tools.js";
+import { BsChevronDown } from "react-icons/bs";
 
 const toolMap = {
 	"s-001": tools.JsonConverter,
-	"s-002": tools.TextCompare,
+	"s-002": tools.CaseFormatter,
 	"s-003": tools.ColorConversion,
 	"s-004": tools.DiffViewer,
 	"s-005": tools.CodeFormatter,
@@ -11,6 +12,11 @@ const toolMap = {
 	"s-007": tools.Base64Encoder,
 	"s-008": tools.HashGenerator,
 	"s-009": tools.CssUnitConverter,
+};
+
+const Styles = {
+	container: "w-full space-y-8",
+	arrow: "w-full text-3xl text-zinc-500",
 };
 
 const Stack = ({ stackedTools }) => {
@@ -40,19 +46,27 @@ const Stack = ({ stackedTools }) => {
 	};
 
 	return (
-		<div className="space-y-16">
+		<div className={Styles.container}>
 			{tools.map((tool, index) => {
 				const ToolComponent = toolMap[tool.id.substring(0, 5)];
 
 				if (ToolComponent) {
 					return (
-						<ToolComponent
-							id={tool.id}
-							key={index}
-							input={tool.input}
-							setOutput={setPropagation}
-							index={index}
-						/>
+						<>
+							<ToolComponent
+								id={tool.id}
+								key={index}
+								input={tool.input}
+								setOutput={setPropagation}
+								index={index}
+							/>
+							<BsChevronDown
+								className={
+									Styles.arrow +
+									` ${index == stackedTools.length - 1 ? "hidden" : ""}`
+								}
+							/>
+						</>
 					);
 				}
 

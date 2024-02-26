@@ -10,9 +10,9 @@ const Styles = {
 	icon: "text-2xl text-zinc-400 duration-300 group-hover:opacity-0",
 	title: "text-md text-center font-thin text-zinc-400 duration-300 group-hover:-translate-y-14",
 	replaceControl:
-		"absolute font-thin w-full py-2 -top-1 flex flex-row items-center justify-center text-yellow-500 -translate-y-12 text-sm",
+		"absolute font-thin w-full py-2 -top-1 flex flex-row items-center justify-center text-yellow-600 -translate-y-12 text-sm",
 	addControl:
-		"absolute w-full bottom-3 py-2 font-thin flex flex-row items-center justify-center text-emerald-500 translate-y-12 text-sm",
+		"absolute w-full bottom-3 py-2 font-thin flex flex-row items-center justify-center text-emerald-600 translate-y-12 text-sm",
 	replaceIcon: "text-md ml-2",
 	addIcon: "text-md mr-2",
 };
