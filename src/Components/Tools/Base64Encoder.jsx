@@ -1,13 +1,14 @@
 import React from "react";
 
-const Base64Encoder = ({ index, input, setOutput }) => {
+const Base64Encoder = ({ id, index, input, setOutput }) => {
 	return (
-		<div
-			onClick={() => {
-				setOutput(input ? input : "Base64Encoder", index);
-			}}
-		>
+		<div className="my-12 rounded-xl bg-zinc-800 bg-opacity-40 p-6 text-3xl font-thin text-zinc-400">
 			Base64Encoder INPUT:{input}
+			<input
+				onChange={(e) => {
+					setOutput(e.target.value.toLocaleUpperCase(), index);
+				}}
+			></input>
 		</div>
 	);
 };

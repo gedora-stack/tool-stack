@@ -29,48 +29,42 @@ const BannerTool = ({
 	const [dragRemove, setDragRemove] = useState(false);
 
 	return (
-		<AnimatePresence mode="wait">
-			<motion.div
-				onDragStart={(e) => {
-					handleDragStart(e, { id: id, title: title });
-					setDragRemove(true);
+		<div
+			onDragStart={(e) => {
+				handleDragStart(e, { id: id, title: title });
+				setDragRemove(true);
+			}}
+			onDragEnd={() => {
+				setDragRemove(false);
+			}}
+			key={id}
+			draggable="true"
+			className={Styles.container}
+		>
+			<p className={Styles.description}>{description}</p>
+			<div className="flex flex-col items-center space-y-6">
+				{Icon && <Icon className={Styles.icon} />}
+				<h1 className={Styles.title}>{title}</h1>
+			</div>
+			<div
+				onClick={() => {
+					handleSingleMode({ id: id, title: title });
 				}}
-				onDragEnd={() => {
-					setDragRemove(false);
-				}}
-				key={id}
-				draggable="true"
-				initial={{ opacity: 0 }}
-				animate={{ opacity: 1 }}
-				exit={{ opacity: 0 }}
-				transition={{ duration: 0.3 }}
-				className={Styles.container}
+				className={`${Styles.replaceControl} ${!dragRemove ? "opacity-0 duration-300 group-hover:opacity-100" : "opacity-0 duration-0 group-hover:opacity-0"}`}
 			>
-				<p className={Styles.description}>{description}</p>
-				<div className="flex flex-col items-center space-y-6">
-					{Icon && <Icon className={Styles.icon} />}
-					<h1 className={Styles.title}>{title}</h1>
-				</div>
-				<div
-					onClick={() => {
-						handleSingleMode({ id: id, title: title });
-					}}
-					className={`${Styles.replaceControl} ${!dragRemove ? "opacity-0 duration-300 group-hover:opacity-100" : "opacity-0 duration-0 group-hover:opacity-0"}`}
-				>
-					Single mode
-					<BsBoxArrowUpRight className={Styles.replaceIcon} />
-				</div>
-				<div
-					onClick={() => {
-						handleQuickAdd({ id: id, title: title });
-					}}
-					className={`${Styles.addControl} ${!dragRemove ? "opacity-0 duration-300 group-hover:opacity-100" : "opacity-0 duration-0 group-hover:opacity-0"}`}
-				>
-					<BsPlusSquare className={Styles.addIcon} />
-					Quick add
-				</div>
-			</motion.div>
-		</AnimatePresence>
+				Single mode
+				<BsBoxArrowUpRight className={Styles.replaceIcon} />
+			</div>
+			<div
+				onClick={() => {
+					handleQuickAdd({ id: id, title: title });
+				}}
+				className={`${Styles.addControl} ${!dragRemove ? "opacity-0 duration-300 group-hover:opacity-100" : "opacity-0 duration-0 group-hover:opacity-0"}`}
+			>
+				<BsPlusSquare className={Styles.addIcon} />
+				Quick add
+			</div>
+		</div>
 	);
 };
 

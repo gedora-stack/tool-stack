@@ -15,20 +15,25 @@ import { useState } from "react";
 import Stack from "./Stack";
 import BannerTool from "./BannerTool";
 import { v4 as uuidv4 } from "uuid";
+import { AnimatePresence, motion } from "framer-motion";
 
 const Styles = {
-	mainContainer:
-		"flex h-screen flex-row items-center justify-between overflow-y-hidden bg-zinc-900",
+	pageContainer:
+		"flex h-screen flex-row items-center w-full justify-between bg-zinc-900",
+	mainContainer: "flex w-full h-screen flex-col items-center justify-center",
 	bannerContainer:
 		"flex h-full w-full min-w-[32rem] flex-col items-center justify-start pt-[8vh]",
 	bannerGrid:
-		"container-snap grid grid-cols-1 gap-16 overflow-y-scroll pb-14 pt-28 lg:grid-cols-2 xl:grid-cols-3",
+		"container-snap max-h-screen px-4 masked-overflow grid grid-cols-1 gap-16 py-20 overflow-y-scroll lg:grid-cols-2 xl:grid-cols-3",
+	stackContainer:
+		"px-20 w-full h-full flex items-center flex-col overflow-y-scroll",
 };
 
 const App = () => {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [deployed, setDeployed] = useState(false);
 	const [stackedTools, setStackedTools] = useState([]);
+	const [rerenderId, setRerenderId] = useState(uuidv4());
 
 	//Array of tools with unique ids
 	const [tools, setTools] = useState([
@@ -93,6 +98,7 @@ const App = () => {
 		if (stackedTools.length == 0) {
 			setDeployed(false);
 		}
+		setRerenderId(uuidv4());
 	}, [stackedTools]);
 
 	//Grabs the title and the id when starting drag
@@ -128,40 +134,58 @@ const App = () => {
 
 	return (
 		<>
-			<div className={Styles.mainContainer}>
+			<div className={Styles.pageContainer}>
 				<Sidebar
 					setDeployed={setDeployed}
 					deployed={deployed}
 					stackedTools={stackedTools}
 					setStackedTools={setStackedTools}
 				/>
-				<div className={Styles.bannerContainer}>
+				<div className={Styles.mainContainer}>
 					{deployed ? (
-						<>
-							<Stack stackedTools={stackedTools} />
-						</>
+						<AnimatePresence mode="wait">
+							<motion.div
+								className={`${Styles.stackContainer} ${stackedTools.length == 1 ? "justify-center" : "justify-start"}`}
+								key={rerenderId + uuidv4()}
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								exit={{ opacity: 0 }}
+								transition={{ duration: 0.3 }}
+							>
+								<Stack stackedTools={stackedTools} />
+							</motion.div>
+						</AnimatePresence>
 					) : (
-						<>
-							<Search
-								onChange={(e) => {
-									setSearchQuery(e.target.value);
-								}}
-							/>
-							<div className={Styles.bannerGrid}>
-								{filteredTools.map((tool, index) => (
-									<BannerTool
-										handleSingleMode={handleSingleMode}
-										handleQuickAdd={handleQuickAdd}
-										handleDragStart={handleDragStart}
-										key={tool.id}
-										id={tool.id}
-										title={tool.title}
-										icon={tool.icon}
-										description={tool.description}
-									/>
-								))}
-							</div>
-						</>
+						<AnimatePresence mode="wait">
+							<motion.div
+								className={Styles.bannerContainer}
+								key={"banner"}
+								initial={{ opacity: 0 }}
+								animate={{ opacity: 1 }}
+								exit={{ opacity: 0 }}
+								transition={{ duration: 0.3 }}
+							>
+								<Search
+									onChange={(e) => {
+										setSearchQuery(e.target.value);
+									}}
+								/>
+								<div className={Styles.bannerGrid}>
+									{filteredTools.map((tool, index) => (
+										<BannerTool
+											handleSingleMode={handleSingleMode}
+											handleQuickAdd={handleQuickAdd}
+											handleDragStart={handleDragStart}
+											key={tool.id}
+											id={tool.id}
+											title={tool.title}
+											icon={tool.icon}
+											description={tool.description}
+										/>
+									))}
+								</div>
+							</motion.div>
+						</AnimatePresence>
 					)}
 				</div>
 			</div>

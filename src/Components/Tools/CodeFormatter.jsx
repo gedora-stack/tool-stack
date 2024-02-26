@@ -1,13 +1,14 @@
 import React from "react";
 
-const CodeFormatter = ({ index, input, setOutput }) => {
+const CodeFormatter = ({ id, index, input, setOutput }) => {
 	return (
-		<div
-			onClick={() => {
-				setOutput(input ? input : "CodeFormatter", index);
-			}}
-		>
+		<div className="my-12 rounded-xl bg-zinc-800 bg-opacity-40 p-6 text-3xl font-thin text-zinc-400">
 			CodeFormatter INPUT:{input}
+			<input
+				onChange={(e) => {
+					setOutput(e.target.value.toLocaleUpperCase(), index);
+				}}
+			></input>
 		</div>
 	);
 };

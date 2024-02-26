@@ -47,6 +47,7 @@ const Stack = ({ stackedTools }) => {
 				if (ToolComponent) {
 					return (
 						<ToolComponent
+							id={tool.id}
 							key={index}
 							input={tool.input}
 							setOutput={setPropagation}

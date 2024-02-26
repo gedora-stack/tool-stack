@@ -6,6 +6,21 @@ body {
 	background-color: #18181b;
 }
 
+.masked-overflow {
+	mask-image: linear-gradient(
+		to bottom,
+		transparent,
+		black 4rem,
+		black calc(100% - 4rem),
+		transparent
+	);
+	mask-size: 100% 100%;
+	mask-position:
+		0 0,
+		100% 0;
+	mask-repeat: no-repeat, no-repeat;
+}
+
 .container-snap::-webkit-scrollbar {
 	display: none;
 }
