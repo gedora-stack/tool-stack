@@ -14,7 +14,7 @@ const Styles = {
 	additionHelper:
 		"absolute -right-14 top-1/2 text-3xl text-emerald-600 duration-300",
 	sidebarButton:
-		"my-4 rounded-lg border border-zinc-700 px-4 py-1 text-xl font-thin text-zinc-400",
+		"my-4 rounded-lg border border-zinc-700 px-4 py-1 text-xl font-thin text-zinc-400 duration-300",
 };
 
 const Sidebar = ({ setDeployed, deployed, stackedTools, setStackedTools }) => {
@@ -61,6 +61,13 @@ const Sidebar = ({ setDeployed, deployed, stackedTools, setStackedTools }) => {
 		);
 	};
 
+	const handleDeploy = () => {
+		if (stackedTools.length > 0) {
+			setDeployed(!deployed);
+		} else {
+		}
+	};
+
 	return (
 		<div
 			onDrop={handleDragEnd}
@@ -102,10 +109,8 @@ const Sidebar = ({ setDeployed, deployed, stackedTools, setStackedTools }) => {
 				<BsFillPlusCircleFill />
 			</div>
 			<button
-				onClick={() => {
-					setDeployed(!deployed);
-				}}
-				className={Styles.sidebarButton}
+				onClick={handleDeploy}
+				className={`${Styles.sidebarButton} ${stackedTools.length > 0 ? "text-zinc-400" : "text-zinc-700"}`}
 			>
 				{deployed ? "Add" : "Deploy"}
 			</button>

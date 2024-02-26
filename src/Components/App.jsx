@@ -93,7 +93,7 @@ const App = () => {
 		if (stackedTools.length == 0) {
 			setDeployed(false);
 		}
-	}, [stackedTools, deployed]);
+	}, [stackedTools]);
 
 	//Grabs the title and the id when starting drag
 	const handleDragStart = (e, tool) => {
