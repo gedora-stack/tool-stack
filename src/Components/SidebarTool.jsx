@@ -10,7 +10,7 @@ const Styles = {
 	removeCross:
 		"cursor-pointer duration-500 hover:scale-125 hover:text-red-400",
 	title: "flex-grow text-center",
-	arrow: "text-lg text-zinc-400 duration-500",
+	arrow: "text-lg text-zinc-400 duration-300",
 };
 
 const SidebarTool = ({
