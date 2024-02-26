@@ -61,6 +61,7 @@ const Sidebar = ({ setDeployed, deployed, stackedTools, setStackedTools }) => {
 		);
 	};
 
+	//Prevents deploy when no tools in stack
 	const handleDeploy = () => {
 		if (stackedTools.length > 0) {
 			setDeployed(!deployed);

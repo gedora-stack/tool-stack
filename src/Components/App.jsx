@@ -95,6 +95,7 @@ const App = () => {
 	]);
 
 	//Checks if stack empty and shows banner page
+	//Rerenders stack every time it changes
 	useEffect(() => {
 		if (stackedTools.length == 0) {
 			setDeployed(false);
@@ -113,6 +114,7 @@ const App = () => {
 		tool.title.toLowerCase().includes(searchQuery.toLowerCase()),
 	);
 
+	//Adds tool to bottom of stack when pressing quick add
 	const handleQuickAdd = (tool) => {
 		setStackedTools([
 			...stackedTools,
@@ -123,6 +125,7 @@ const App = () => {
 		]);
 	};
 
+	//Deploys only a single selected tool
 	const handleSingleMode = (tool) => {
 		setStackedTools([
 			{
@@ -143,8 +146,8 @@ const App = () => {
 					setStackedTools={setStackedTools}
 				/>
 				<div className={Styles.mainContainer}>
-					{deployed ? (
-						<AnimatePresence mode="wait">
+					<AnimatePresence mode="wait">
+						{deployed ? (
 							<motion.div
 								className={`${Styles.stackContainer} ${stackedTools.length == 1 ? "justify-center" : "justify-start"}`}
 								key={rerenderId + uuidv4()}
@@ -155,9 +158,7 @@ const App = () => {
 							>
 								<Stack stackedTools={stackedTools} />
 							</motion.div>
-						</AnimatePresence>
-					) : (
-						<AnimatePresence mode="wait">
+						) : (
 							<motion.div
 								className={Styles.bannerContainer}
 								key={"banner"}
@@ -172,7 +173,7 @@ const App = () => {
 									}}
 								/>
 								<div className={Styles.bannerGrid}>
-									{filteredTools.map((tool, index) => (
+									{filteredTools.map((tool) => (
 										<BannerTool
 											handleSingleMode={handleSingleMode}
 											handleQuickAdd={handleQuickAdd}
@@ -186,8 +187,8 @@ const App = () => {
 									))}
 								</div>
 							</motion.div>
-						</AnimatePresence>
-					)}
+						)}
+					</AnimatePresence>
 				</div>
 			</div>
 		</>

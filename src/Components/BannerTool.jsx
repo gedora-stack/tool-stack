@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
 import { BsBoxArrowUpRight, BsPlusSquare } from "react-icons/bs";
 
 const Styles = {
@@ -7,6 +6,7 @@ const Styles = {
 		"group relative flex h-36 w-56 max-w-56 cursor-grab select-none flex-col items-center justify-center space-y-4 rounded-2xl border border-zinc-700 bg-zinc-800 bg-opacity-40 p-8 backdrop-blur-lg duration-100 active:cursor-grabbing active:outline-none",
 	description:
 		"absolute w-40 text-center text-sm font-thin text-zinc-500 opacity-0 duration-300 group-hover:translate-y-6 group-hover:opacity-100",
+	titleContainer: "flex flex-col items-center space-y-6",
 	icon: "text-2xl text-zinc-400 duration-300 group-hover:opacity-0",
 	title: "text-md text-center font-thin text-zinc-400 duration-300 group-hover:-translate-y-14",
 	replaceControl:
@@ -42,7 +42,7 @@ const BannerTool = ({
 			className={Styles.container}
 		>
 			<p className={Styles.description}>{description}</p>
-			<div className="flex flex-col items-center space-y-6">
+			<div className={Styles.titleContainer}>
 				{Icon && <Icon className={Styles.icon} />}
 				<h1 className={Styles.title}>{title}</h1>
 			</div>

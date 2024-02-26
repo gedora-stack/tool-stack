@@ -5,6 +5,7 @@ import { RxCross1 } from "react-icons/rx";
 import { BsChevronDown } from "react-icons/bs";
 
 const Styles = {
+	motionContainer: "flex flex-col items-center space-y-6",
 	toolContainer:
 		"flex w-[10.5rem] cursor-grab flex-row items-center justify-between rounded-xl border border-zinc-700 bg-zinc-800 bg-opacity-40 py-3 pl-3 font-thin text-zinc-400",
 	removeCross:
@@ -69,7 +70,7 @@ const SidebarTool = ({
 			transition={{ duration: 0.2 }}
 			layout
 			layoutId={id}
-			className="flex flex-col items-center"
+			className={Styles.motionContainer}
 			onDrop={handleDragEnd}
 			onDragOver={(e) => {
 				e.preventDefault();
