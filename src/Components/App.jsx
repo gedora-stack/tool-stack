@@ -16,6 +16,7 @@ import Stack from "./Stack";
 import BannerTool from "./BannerTool";
 import { v4 as uuidv4 } from "uuid";
 import { AnimatePresence, motion } from "framer-motion";
+import SidebarSingle from "./SidebarSingle";
 
 const Styles = {
 	pageContainer:
@@ -35,6 +36,7 @@ const App = () => {
 	const [deployed, setDeployed] = useState(false);
 	const [stackedTools, setStackedTools] = useState([]);
 	const [rerenderId, setRerenderId] = useState(uuidv4());
+	const [singleSidebar, setSingleSidebar] = useState(false);
 
 	//Array of tools with unique ids
 	const [tools, setTools] = useState([
@@ -97,10 +99,10 @@ const App = () => {
 	//Checks if stack empty and shows banner page
 	//Rerenders stack every time it changes
 	useEffect(() => {
+		setRerenderId(uuidv4());
 		if (stackedTools.length == 0) {
 			setDeployed(false);
 		}
-		setRerenderId(uuidv4());
 	}, [stackedTools]);
 
 	//Grabs the title and the id when starting drag
@@ -133,18 +135,44 @@ const App = () => {
 				id: tool.id.replace("b", "s") + "-" + uuidv4(),
 			},
 		]);
+		setSingleSidebar(true);
 		setDeployed(true);
 	};
 
 	return (
 		<>
 			<div className={Styles.pageContainer}>
-				<Sidebar
-					setDeployed={setDeployed}
-					deployed={deployed}
-					stackedTools={stackedTools}
-					setStackedTools={setStackedTools}
-				/>
+				<AnimatePresence mode="wait">
+					{singleSidebar ? (
+						<motion.div
+							key={"singleSidebar"}
+							initial={{ x: "-100%" }}
+							animate={{ x: 0 }}
+							exit={{ x: "-100%" }}
+							transition={{ duration: 0.2 }}
+						>
+							<SidebarSingle
+								setSingleSidebar={setSingleSidebar}
+								setDeployed={setDeployed}
+							/>
+						</motion.div>
+					) : (
+						<motion.div
+							key={"sidebar"}
+							initial={{ x: "-100%" }}
+							animate={{ x: 0 }}
+							exit={{ x: "-100%" }}
+							transition={{ duration: 0.2 }}
+						>
+							<Sidebar
+								setDeployed={setDeployed}
+								deployed={deployed}
+								stackedTools={stackedTools}
+								setStackedTools={setStackedTools}
+							/>
+						</motion.div>
+					)}
+				</AnimatePresence>
 				<div className={Styles.mainContainer}>
 					<AnimatePresence mode="wait">
 						{deployed ? (
@@ -154,9 +182,12 @@ const App = () => {
 								initial={{ opacity: 0 }}
 								animate={{ opacity: 1 }}
 								exit={{ opacity: 0 }}
-								transition={{ duration: 0.3 }}
+								transition={{ duration: 0.2 }}
 							>
-								<Stack stackedTools={stackedTools} />
+								<Stack
+									setStackedTools={setStackedTools}
+									stackedTools={stackedTools}
+								/>
 							</motion.div>
 						) : (
 							<motion.div
