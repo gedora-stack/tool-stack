@@ -65,7 +65,6 @@ const Sidebar = ({ setDeployed, deployed, stackedTools, setStackedTools }) => {
 	const handleDeploy = () => {
 		if (stackedTools.length > 0) {
 			setDeployed(!deployed);
-		} else {
 		}
 	};
 
@@ -117,7 +116,7 @@ const Sidebar = ({ setDeployed, deployed, stackedTools, setStackedTools }) => {
 					type="checkbox"
 					checked={deployed}
 					onChange={() => {
-						setDeployed(!deployed);
+						handleDeploy();
 					}}
 					className="peer sr-only"
 				></input>
