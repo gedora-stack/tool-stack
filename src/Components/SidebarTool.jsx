@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { v4 as uuidv4 } from "uuid";
 import { RxCross1 } from "react-icons/rx";
@@ -24,8 +24,16 @@ const SidebarTool = ({
 	handleRemove,
 	setAdditionHelper,
 	setExchangeEvent,
+	setExclusionHelper,
 }) => {
 	const [exchange, setExchange] = useState(false);
+
+	useEffect(() => {
+		return () => {
+			setExclusionHelper(false);
+			setExchangeEvent(false);
+		};
+	}, []);
 
 	//When dropping stacked tool on a stacked tool, remove the tool that is being dropped, then add the dropped tool
 	//at the index of the tool that it is being dropped on

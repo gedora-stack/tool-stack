@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { BsFillPlusCircleFill } from "react-icons/bs";
+import { BsFillPlusCircleFill, BsFillXCircleFill } from "react-icons/bs";
 import SidebarTool from "./SidebarTool";
 
 const Styles = {
@@ -13,6 +13,8 @@ const Styles = {
 		"font-sm flex h-full animate-fade items-center justify-center text-center font-thin text-zinc-500 animate-duration-300",
 	additionHelper:
 		"absolute -right-14 top-1/2 text-3xl text-emerald-600 duration-300",
+	exclusionHelper:
+		"absolute -right-14 top-1/2 text-3xl text-rose-600 duration-300",
 	sidebarButton:
 		"my-4 rounded-lg animate-fade border border-zinc-700 px-4 py-1 text-xl font-thin text-zinc-400 duration-300 cursor-pointer",
 	toggleTitle: "me-3 text-base font-thin text-zinc-400",
@@ -22,6 +24,7 @@ const Styles = {
 
 const Sidebar = ({ setDeployed, deployed, stackedTools, setStackedTools }) => {
 	const [additionHelper, setAdditionHelper] = useState(false);
+	const [exclusionHelper, setExclusionHelper] = useState(false);
 	const [exchangeEvent, setExchangeEvent] = useState(false);
 
 	//For stacked tools, grabs the id, title and index in stack of the dragged tool
@@ -75,11 +78,13 @@ const Sidebar = ({ setDeployed, deployed, stackedTools, setStackedTools }) => {
 		<div
 			onDrop={handleDragEnd}
 			onDragOver={(e) => {
+				setExclusionHelper(false);
 				setAdditionHelper(true);
 				e.preventDefault();
 			}}
 			onDragLeave={() => {
 				setAdditionHelper(false);
+				setExclusionHelper(true);
 			}}
 			className={Styles.sidebarContainer}
 		>
@@ -92,6 +97,7 @@ const Sidebar = ({ setDeployed, deployed, stackedTools, setStackedTools }) => {
 				) : (
 					stackedTools.map((tool, index) => (
 						<SidebarTool
+							setExclusionHelper={setExclusionHelper}
 							setExchangeEvent={setExchangeEvent}
 							key={tool.id}
 							setAdditionHelper={setAdditionHelper}
@@ -110,6 +116,11 @@ const Sidebar = ({ setDeployed, deployed, stackedTools, setStackedTools }) => {
 				className={`${Styles.additionHelper} ${additionHelper && !exchangeEvent ? "-translate-x-3 rotate-0 opacity-100" : "translate-x-0 rotate-90 opacity-0"}`}
 			>
 				<BsFillPlusCircleFill />
+			</div>
+			<div
+				className={`${Styles.exclusionHelper} ${exclusionHelper && exchangeEvent ? "-translate-x-3 rotate-0 opacity-100" : "translate-x-0 rotate-90 opacity-0"}`}
+			>
+				<BsFillXCircleFill />
 			</div>
 			<label className={Styles.toggleLabel}>
 				<input
