@@ -124,6 +124,14 @@ const App = () => {
 		]);
 	};
 
+	const handleRemoveOnDrop = (e) => {
+		setStackedTools((prevTools) =>
+			prevTools.filter(
+				(tool) => tool.id !== e.dataTransfer.getData("toolId"),
+			),
+		);
+	};
+
 	//Deploys only a single selected tool
 	const handleSingleMode = (tool) => {
 		setStackedTools([
@@ -170,7 +178,13 @@ const App = () => {
 						</motion.div>
 					)}
 				</AnimatePresence>
-				<div className={Styles.mainContainer}>
+				<div
+					onDrop={handleRemoveOnDrop}
+					onDragOver={(e) => {
+						e.preventDefault();
+					}}
+					className={Styles.mainContainer}
+				>
 					<AnimatePresence mode="wait">
 						{deployed ? (
 							<motion.div
