@@ -109,23 +109,20 @@ const Sidebar = ({ setDeployed, deployed, stackedTools, setStackedTools }) => {
 			>
 				<BsFillPlusCircleFill />
 			</div>
-			{deployed ? (
-				<div
-					key={"configure"}
-					onClick={handleDeploy}
-					className={`${Styles.sidebarButton} ${stackedTools.length > 0 ? "text-zinc-400" : "text-zinc-700"}`}
-				>
-					Configure
-				</div>
-			) : (
-				<div
-					key={"deploy"}
-					onClick={handleDeploy}
-					className={`${Styles.sidebarButton} ${stackedTools.length > 0 ? "text-zinc-400" : "text-zinc-700"}`}
-				>
-					Deploy
-				</div>
-			)}
+			<label className="my-6 inline-flex cursor-pointer items-center">
+				<span className="me-3 text-base font-thin text-zinc-400">
+					Active
+				</span>
+				<input
+					type="checkbox"
+					checked={deployed}
+					onChange={() => {
+						setDeployed(!deployed);
+					}}
+					className="peer sr-only"
+				></input>
+				<div className="peer relative h-6 w-11 rounded-full bg-zinc-700 duration-500 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:bg-zinc-300 after:transition-all after:duration-500 after:content-[''] peer-checked:bg-zinc-500 peer-checked:after:translate-x-full peer-focus:outline-none peer-focus:ring-4 rtl:peer-checked:after:-translate-x-full"></div>
+			</label>
 		</div>
 	);
 };
