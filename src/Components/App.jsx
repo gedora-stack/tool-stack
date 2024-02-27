@@ -35,7 +35,6 @@ const App = () => {
 	const [searchQuery, setSearchQuery] = useState("");
 	const [deployed, setDeployed] = useState(false);
 	const [stackedTools, setStackedTools] = useState([]);
-	const [rerenderId, setRerenderId] = useState(uuidv4());
 	const [singleSidebar, setSingleSidebar] = useState(false);
 
 	//Array of tools with unique ids
@@ -97,9 +96,7 @@ const App = () => {
 	]);
 
 	//Checks if stack empty and shows banner page
-	//Rerenders stack every time it changes
 	useEffect(() => {
-		setRerenderId(uuidv4());
 		if (stackedTools.length == 0) {
 			setDeployed(false);
 		}
@@ -145,7 +142,7 @@ const App = () => {
 				<AnimatePresence mode="wait">
 					{singleSidebar ? (
 						<motion.div
-							key={"singleSidebar"}
+							key={singleSidebar}
 							initial={{ x: "-100%" }}
 							animate={{ x: 0 }}
 							exit={{ x: "-100%" }}
@@ -158,7 +155,7 @@ const App = () => {
 						</motion.div>
 					) : (
 						<motion.div
-							key={"sidebar"}
+							key={singleSidebar}
 							initial={{ x: "-100%" }}
 							animate={{ x: 0 }}
 							exit={{ x: "-100%" }}
@@ -177,8 +174,8 @@ const App = () => {
 					<AnimatePresence mode="wait">
 						{deployed ? (
 							<motion.div
+								key={deployed}
 								className={`${Styles.stackContainer} ${stackedTools.length == 1 ? "justify-center" : "justify-start"}`}
-								key={rerenderId + uuidv4()}
 								initial={{ opacity: 0 }}
 								animate={{ opacity: 1 }}
 								exit={{ opacity: 0 }}
@@ -192,7 +189,7 @@ const App = () => {
 						) : (
 							<motion.div
 								className={Styles.bannerContainer}
-								key={"banner"}
+								key={deployed}
 								initial={{ opacity: 0 }}
 								animate={{ opacity: 1 }}
 								exit={{ opacity: 0 }}

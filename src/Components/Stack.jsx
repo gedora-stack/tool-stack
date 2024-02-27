@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import * as tools from "./Tools/Tools.js";
 import { BsChevronDown } from "react-icons/bs";
+import { motion } from "framer-motion";
 
 const toolMap = {
 	"s-001": tools.JsonConverter,
@@ -15,31 +16,21 @@ const toolMap = {
 };
 
 const Styles = {
-	container: "w-full space-y-8",
-	arrow: "w-full text-3xl text-zinc-500",
+	container: "w-full",
+	arrow: "w-full text-3xl text-zinc-500 my-8",
 };
 
 const Stack = ({ stackedTools }) => {
-	const [tools, setTools] = useState([]);
+	const [inputs, setInputs] = useState(Array(stackedTools.length).fill(""));
 
-	//Renders corresponding components for tools in array, updated when array changed
-	useEffect(() => {
-		const updatedTools = stackedTools.map((tool, index) => ({
-			index: index,
-			id: tool.id,
-			input: "",
-		}));
-		setTools(updatedTools);
-	}, [stackedTools]);
-
-	//For propagating outputs to tools in stack, makes the output of the current tool and input of the next tool by index in array
+	// For propagating outputs to tools in stack, makes the output of the current tool and input of the next tool by index in array
 	const setPropagation = (output, index) => {
-		setTools((prevTools) => {
-			return prevTools.map((tool) => {
-				if (tool.index === index + 1) {
-					return { ...tool, input: output };
+		setInputs((prevInputs) => {
+			return prevInputs.map((input, i) => {
+				if (i === index + 1) {
+					return output;
 				} else {
-					return tool;
+					return input;
 				}
 			});
 		});
@@ -47,26 +38,26 @@ const Stack = ({ stackedTools }) => {
 
 	return (
 		<div className={Styles.container}>
-			{tools.map((tool, index) => {
+			{stackedTools.map((tool, index) => {
 				const ToolComponent = toolMap[tool.id.substring(0, 5)];
 
 				if (ToolComponent) {
 					return (
-						<>
+						<motion.div key={tool.id} layout>
 							<ToolComponent
 								id={tool.id}
 								key={index}
-								input={tool.input}
+								input={inputs[index]}
 								setOutput={setPropagation}
 								index={index}
 							/>
 							<BsChevronDown
 								className={
 									Styles.arrow +
-									` ${index == stackedTools.length - 1 ? "hidden" : ""}`
+									` ${index === stackedTools.length - 1 ? "hidden" : ""}`
 								}
 							/>
-						</>
+						</motion.div>
 					);
 				}
 

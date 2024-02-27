@@ -69,7 +69,6 @@ const SidebarTool = ({
 			exit={{ opacity: 0, scale: 0 }}
 			transition={{ duration: 0.2 }}
 			layout
-			layoutId={id}
 			className={Styles.motionContainer}
 			onDrop={handleDragEnd}
 			onDragOver={(e) => {
