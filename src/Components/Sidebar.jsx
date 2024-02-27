@@ -15,6 +15,9 @@ const Styles = {
 		"absolute -right-14 top-1/2 text-3xl text-emerald-600 duration-300",
 	sidebarButton:
 		"my-4 rounded-lg animate-fade border border-zinc-700 px-4 py-1 text-xl font-thin text-zinc-400 duration-300 cursor-pointer",
+	toggleTitle: "me-3 text-base font-thin text-zinc-400",
+	toggleInput: "peer sr-only",
+	toggle: "peer my-4 relative h-6 w-11 rounded-full bg-zinc-700 duration-500 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:bg-zinc-300 after:transition-all after:duration-500 after:content-[''] peer-checked:bg-zinc-500 peer-checked:after:translate-x-full peer-focus:outline-none peer-focus:ring-4 rtl:peer-checked:after:-translate-x-full",
 };
 
 const Sidebar = ({ setDeployed, deployed, stackedTools, setStackedTools }) => {
@@ -80,7 +83,7 @@ const Sidebar = ({ setDeployed, deployed, stackedTools, setStackedTools }) => {
 			}}
 			className={Styles.sidebarContainer}
 		>
-			<h1 className={Styles.title}>Your Stack</h1>
+			<h1 className={Styles.title}>Your stack</h1>
 			<div className={Styles.stackContainer}>
 				{stackedTools.length === 0 ? (
 					<p className={Styles.toolTip}>
@@ -108,19 +111,16 @@ const Sidebar = ({ setDeployed, deployed, stackedTools, setStackedTools }) => {
 			>
 				<BsFillPlusCircleFill />
 			</div>
-			<label className="my-6 inline-flex cursor-pointer items-center">
-				<span className="me-3 text-base font-thin text-zinc-400">
-					Active
-				</span>
+			<label className={Styles.toggleLabel}>
 				<input
 					type="checkbox"
 					checked={deployed}
 					onChange={() => {
 						handleDeploy();
 					}}
-					className="peer sr-only"
+					className={Styles.toggleInput}
 				></input>
-				<div className="peer relative h-6 w-11 rounded-full bg-zinc-700 duration-500 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full after:bg-zinc-300 after:transition-all after:duration-500 after:content-[''] peer-checked:bg-zinc-500 peer-checked:after:translate-x-full peer-focus:outline-none peer-focus:ring-4 rtl:peer-checked:after:-translate-x-full"></div>
+				<div className={Styles.toggle}></div>
 			</label>
 		</div>
 	);
