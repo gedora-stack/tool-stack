@@ -5,7 +5,7 @@ import { RxCross1 } from "react-icons/rx";
 import { BsChevronDown } from "react-icons/bs";
 
 const Styles = {
-	motionContainer: "flex flex-col items-center space-y-6",
+	motionContainer: "flex flex-col items-center",
 	toolContainer:
 		"flex w-[10.5rem] cursor-grab flex-row items-center justify-between rounded-xl border border-zinc-700 bg-zinc-800 bg-opacity-40 py-3 pl-3 font-thin text-zinc-400",
 	removeCross:
@@ -102,7 +102,7 @@ const SidebarTool = ({
 				<div className={Styles.title}>{title}</div>
 			</div>
 			<BsChevronDown
-				className={`${Styles.arrow} ${exchange ? "mb-16 mt-3" : "my-3 "} ${index != stackedTools.length - 1 ? "opacity-100" : "-translate-y-5 opacity-0"}`}
+				className={`${Styles.arrow} ${exchange ? "mb-16 mt-3" : "my-3"} ${index != stackedTools.length - 1 ? "opacity-100" : "-translate-y-5 opacity-0"}`}
 			/>
 		</motion.div>
 	);
