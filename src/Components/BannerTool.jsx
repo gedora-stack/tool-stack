@@ -3,18 +3,18 @@ import { BsBoxArrowUpRight, BsPlusSquare } from "react-icons/bs";
 
 const Styles = {
 	container:
-		"group relative flex h-36 w-56 max-w-56 cursor-grab select-none flex-col items-center justify-center space-y-4 rounded-2xl border border-zinc-700 bg-zinc-800 bg-opacity-40 p-8 backdrop-blur-lg duration-100 active:cursor-grabbing active:outline-none",
+		"group relative flex h-36 w-56 max-w-56 cursor-grab select-none flex-col items-center justify-center space-y-4 rounded-2xl border border-opacity-40 shadow-sm border-zinc-700 bg-zinc-800 bg-opacity-35 p-8 duration-100 active:cursor-grabbing active:outline-none",
 	description:
-		"absolute w-40 text-center text-sm font-thin text-zinc-500 opacity-0 duration-300 group-hover:translate-y-6 group-hover:opacity-100",
+		"absolute w-40 text-center text-sm font-thin text-zinc-400 opacity-0 duration-300 group-hover:translate-y-6 group-hover:opacity-100",
 	titleContainer: "flex flex-col items-center space-y-6",
 	icon: "text-2xl text-zinc-400 duration-300 group-hover:opacity-0",
 	title: "text-md text-center font-thin text-zinc-400 duration-300 group-hover:-translate-y-14",
 	replaceContainer: "absolute -top-16 py-2",
 	replaceControl:
-		"font-thin px-4 py-1 bg-zinc-800 border border-zinc-700 rounded-3xl flex flex-row items-center justify-center text-fuchsia-400 text-sm",
+		"font-thin px-4 py-1 bg-zinc-800 bg-opacity-25 border border-zinc-700 border-opacity-40 rounded-3xl flex flex-row items-center justify-center text-blue-400 text-sm",
 	addContainer: "absolute -bottom-12 py-2",
 	addControl:
-		"py-1 px-4 font-thin bg-zinc-800 border border-zinc-700 rounded-3xl flex flex-row items-center justify-center text-emerald-400 text-sm",
+		"py-1 px-4 font-thin bg-zinc-800 border bg-opacity-25 border-zinc-700 border-opacity-40 rounded-3xl flex flex-row items-center justify-center text-emerald-400 text-sm",
 	replaceIcon: "text-md ml-2",
 	addIcon: "text-md mr-2",
 };

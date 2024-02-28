@@ -2,13 +2,13 @@ import React, { useState } from "react";
 
 const Styles = {
 	mainContainer:
-		"w-full flex space-y-12 flex-col items-center justify-start border border-zinc-700 px-5 py-20 rounded-xl",
+		"w-full flex space-y-12 flex-col items-center justify-start border border-zinc-700 backdrop-blur-3xl border-opacity-50 bg-zinc-800 bg-opacity-15 px-5 py-20 rounded-xl",
 	title: "text-3xl font-thin text-center text-zinc-400",
-	input: "appearance-none w-full bg-zinc-800 border border-zinc-700 rounded-xl font-thin text-zinc-400 px-3 py-2 focus:outline-none",
+	input: "appearance-none w-full bg-zinc-800 border border-zinc-700 border-opacity-50 bg-opacity-35 rounded-xl font-thin text-zinc-400 px-3 py-2 focus:outline-none",
 	inputContainer: "w-3/4 flex items-center justify-center",
 	heading: "font-thin text-lg text-zinc-500 mr-5",
 	actionButton:
-		"font-thin text-zinc-400 mr-6 bg-zinc-800 p-3 rounded-3xl border border-zinc-700",
+		"font-thin text-zinc-400 mr-6 bg-zinc-800 p-3 rounded-3xl border border-opacity-50 bg-opacity-35 border-zinc-700",
 };
 
 const Base64Encoder = ({ id, index, input, setOutput }) => {

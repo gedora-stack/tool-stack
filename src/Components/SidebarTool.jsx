@@ -7,9 +7,9 @@ import { BsChevronDown } from "react-icons/bs";
 const Styles = {
 	motionContainer: "flex flex-col items-center",
 	toolContainer:
-		"flex w-[10.5rem] cursor-grab flex-row items-center justify-between rounded-xl border border-zinc-700 bg-zinc-800 bg-opacity-40 py-3 pl-3 font-thin text-zinc-400",
+		"flex w-[10.5rem] cursor-grab flex-row items-center justify-between rounded-xl border border-opacity-50 border-zinc-700 bg-zinc-800 bg-opacity-15 py-3 pl-3 font-thin text-zinc-400",
 	removeCross:
-		"cursor-pointer duration-500 hover:scale-125 hover:text-red-400",
+		"cursor-pointer duration-300 hover:scale-[1.4] hover:text-rose-500",
 	title: "flex-grow text-center",
 	arrow: "text-lg text-zinc-400 duration-300",
 };

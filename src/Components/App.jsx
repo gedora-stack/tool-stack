@@ -20,7 +20,7 @@ import SidebarSingle from "./SidebarSingle";
 
 const Styles = {
 	pageContainer:
-		"flex h-screen flex-row items-center w-full overflow-y-hidden justify-between bg-zinc-900",
+		"flex h-screen flex-row items-center w-full overflow-y-hidden z-20 justify-between bg-zinc-900",
 	mainContainer:
 		"flex w-full min-w-[32rem] h-screen flex-col items-center justify-center",
 	bannerContainer:
@@ -146,6 +146,13 @@ const App = () => {
 
 	return (
 		<>
+			<div
+				onDrop={handleRemoveOnDrop}
+				onDragOver={(e) => {
+					e.preventDefault();
+				}}
+				className="bg-custom absolute z-0 h-screen w-full"
+			></div>
 			<div className={Styles.pageContainer}>
 				<AnimatePresence mode="wait">
 					{singleSidebar ? (

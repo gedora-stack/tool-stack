@@ -16,7 +16,7 @@ const toolMap = {
 };
 
 const Styles = {
-	container: "w-full",
+	container: "w-full z-20",
 	arrow: "w-full text-3xl text-zinc-500 my-8",
 };
 
