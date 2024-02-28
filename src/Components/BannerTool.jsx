@@ -55,7 +55,7 @@ const BannerTool = ({
 					}}
 					className={`${Styles.replaceControl} ${!dragRemove ? "opacity-0 duration-300 group-hover:opacity-100" : "opacity-0 duration-0 group-hover:opacity-0"}`}
 				>
-					Solo
+					Open
 					<BsBoxArrowUpRight className={Styles.replaceIcon} />
 				</div>
 			</div>
