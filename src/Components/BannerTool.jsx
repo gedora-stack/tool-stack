@@ -9,10 +9,12 @@ const Styles = {
 	titleContainer: "flex flex-col items-center space-y-6",
 	icon: "text-2xl text-zinc-400 duration-300 group-hover:opacity-0",
 	title: "text-md text-center font-thin text-zinc-400 duration-300 group-hover:-translate-y-14",
+	replaceContainer: "absolute -top-16 py-2",
 	replaceControl:
-		"absolute font-thin w-full py-2 -top-1 flex flex-row items-center justify-center text-yellow-600 -translate-y-12 text-sm",
+		"font-thin px-4 py-1 bg-zinc-800 border border-zinc-700 rounded-3xl flex flex-row items-center justify-center text-fuchsia-400 text-sm",
+	addContainer: "absolute -bottom-12 py-2",
 	addControl:
-		"absolute w-full bottom-3 py-2 font-thin flex flex-row items-center justify-center text-emerald-600 translate-y-12 text-sm",
+		"py-1 px-4 font-thin bg-zinc-800 border border-zinc-700 rounded-3xl flex flex-row items-center justify-center text-emerald-400 text-sm",
 	replaceIcon: "text-md ml-2",
 	addIcon: "text-md mr-2",
 };
@@ -46,23 +48,27 @@ const BannerTool = ({
 				{Icon && <Icon className={Styles.icon} />}
 				<h1 className={Styles.title}>{title}</h1>
 			</div>
-			<div
-				onClick={() => {
-					handleSingleMode({ id: id, title: title });
-				}}
-				className={`${Styles.replaceControl} ${!dragRemove ? "opacity-0 duration-300 group-hover:opacity-100" : "opacity-0 duration-0 group-hover:opacity-0"}`}
-			>
-				Single mode
-				<BsBoxArrowUpRight className={Styles.replaceIcon} />
+			<div className={Styles.replaceContainer}>
+				<div
+					onClick={() => {
+						handleSingleMode({ id: id, title: title });
+					}}
+					className={`${Styles.replaceControl} ${!dragRemove ? "opacity-0 duration-300 group-hover:opacity-100" : "opacity-0 duration-0 group-hover:opacity-0"}`}
+				>
+					Solo
+					<BsBoxArrowUpRight className={Styles.replaceIcon} />
+				</div>
 			</div>
-			<div
-				onClick={() => {
-					handleQuickAdd({ id: id, title: title });
-				}}
-				className={`${Styles.addControl} ${!dragRemove ? "opacity-0 duration-300 group-hover:opacity-100" : "opacity-0 duration-0 group-hover:opacity-0"}`}
-			>
-				<BsPlusSquare className={Styles.addIcon} />
-				Quick add
+			<div className={Styles.addContainer}>
+				<div
+					onClick={() => {
+						handleQuickAdd({ id: id, title: title });
+					}}
+					className={`${Styles.addControl} ${!dragRemove ? "opacity-0 duration-300 group-hover:opacity-100" : "opacity-0 duration-0 group-hover:opacity-0"}`}
+				>
+					<BsPlusSquare className={Styles.addIcon} />
+					Stack
+				</div>
 			</div>
 		</div>
 	);
