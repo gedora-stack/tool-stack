@@ -14,7 +14,7 @@ const Styles = {
 	additionHelper:
 		"absolute -right-14 top-1/2 text-3xl text-emerald-600 duration-300",
 	exclusionHelper:
-		"absolute -right-14 top-1/2 text-3xl text-rose-600 duration-300",
+		"absolute -right-11 top-1/2 text-3xl text-rose-600 duration-300",
 	sidebarButton:
 		"my-4 rounded-lg animate-fade border border-zinc-700 px-4 py-1 text-xl font-thin text-zinc-400 duration-300 cursor-pointer",
 	toggleTitle: "me-3 text-base font-thin text-zinc-400",
@@ -118,7 +118,7 @@ const Sidebar = ({ setDeployed, deployed, stackedTools, setStackedTools }) => {
 				<BsFillPlusCircleFill />
 			</div>
 			<div
-				className={`${Styles.exclusionHelper} ${exclusionHelper && exchangeEvent ? "-translate-x-3 rotate-0 opacity-100" : "translate-x-0 rotate-90 opacity-0"}`}
+				className={`${Styles.exclusionHelper} ${exclusionHelper && exchangeEvent ? "translate-x-3 rotate-0 opacity-100" : "translate-x-0 -rotate-90 opacity-0"}`}
 			>
 				<BsFillXCircleFill />
 			</div>
