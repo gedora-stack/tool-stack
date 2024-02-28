@@ -9,12 +9,12 @@ const Styles = {
 	titleContainer: "flex flex-col items-center space-y-6",
 	icon: "text-2xl text-zinc-400 duration-300 group-hover:opacity-0",
 	title: "text-md text-center font-thin text-zinc-400 duration-300 group-hover:-translate-y-14",
-	replaceContainer: "absolute -top-16 py-2",
+	replaceContainer: "absolute -top-16 py-2 cursor-pointer",
 	replaceControl:
 		"font-thin px-4 py-1 bg-zinc-800 bg-opacity-25 border border-zinc-700 border-opacity-40 rounded-3xl flex flex-row items-center justify-center text-blue-400 text-sm",
 	addContainer: "absolute -bottom-12 py-2",
 	addControl:
-		"py-1 px-4 font-thin bg-zinc-800 border bg-opacity-25 border-zinc-700 border-opacity-40 rounded-3xl flex flex-row items-center justify-center text-emerald-400 text-sm",
+		"py-1 px-4 font-thin bg-zinc-800 border bg-opacity-25 border-zinc-700 border-opacity-40 rounded-3xl flex flex-row items-center justify-center text-emerald-400 text-sm cursor-pointer",
 	replaceIcon: "text-md ml-2",
 	addIcon: "text-md mr-2",
 };

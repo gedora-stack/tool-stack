@@ -6,11 +6,11 @@ import SidebarTool from "./SidebarTool";
 const Styles = {
 	sidebarContainer:
 		"relative z-10 flex h-[84vh] min-w-[15rem] max-w-[15rem] flex-col items-center justify-start rounded-r-2xl bg-opacity-35 border-y border-r border-y-zinc-700 border-r-zinc-700 border-opacity-50 bg-zinc-800 px-3 text-sm duration-500",
-	title: "my-4 text-xl font-thin text-zinc-400",
+	title: "my-4 text-xl font-thin text-zinc-400 select-none",
 	stackContainer:
 		"container-snap h-full w-[12rem] overflow-y-scroll border-b border-t border-b-zinc-700 border-opacity-50 border-t-zinc-700 py-6",
 	toolTip:
-		"font-sm flex h-full animate-fade items-center justify-center text-center font-thin text-zinc-500 animate-duration-300",
+		"font-sm flex h-full animate-fade items-center justify-center text-center font-thin text-zinc-500 animate-duration-300 select-none",
 	additionHelper:
 		"absolute -right-14 top-1/2 text-3xl text-emerald-500 duration-300",
 	exclusionHelper:
@@ -18,7 +18,7 @@ const Styles = {
 	sidebarButton:
 		"my-4 rounded-lg animate-fade border border-zinc-700 px-4 py-1 text-xl font-thin text-zinc-400 duration-300 cursor-pointer",
 	toggleInput: "peer sr-only",
-	toggle: "peer my-4 relative h-6 w-10 rounded-full border border-zinc-700 bg-zinc-700 bg-opacity-60 duration-500 after:absolute after:start-[3px] after:top-[3px] after:h-4 after:w-4 after:rounded-full after:bg-zinc-300 after:transition-all after:duration-500 after:content-[''] peer-checked:bg-zinc-300 peer-checked:bg-opacity-40 peer-checked:after:translate-x-full peer-focus:outline-none peer-focus:ring-4 rtl:peer-checked:after:-translate-x-full",
+	toggle: "peer my-4 relative h-6 w-10 rounded-full border border-zinc-700 bg-zinc-700 bg-opacity-60 duration-500 after:absolute after:start-[3px] after:top-[3px] after:h-4 after:w-4 after:rounded-full after:bg-zinc-300 after:transition-all after:duration-500 after:content-[''] peer-checked:bg-zinc-300 peer-checked:bg-opacity-40 peer-checked:after:translate-x-full peer-focus:outline-none peer-focus:ring-4 rtl:peer-checked:after:-translate-x-full cursor-pointer",
 };
 
 const Sidebar = ({ setDeployed, deployed, stackedTools, setStackedTools }) => {
