@@ -27,6 +27,7 @@ const SidebarTool = ({
 	setExclusionHelper,
 }) => {
 	const [exchange, setExchange] = useState(false);
+	const [grab, setGrab] = useState(false);
 
 	useEffect(() => {
 		return () => {
@@ -91,14 +92,19 @@ const SidebarTool = ({
 			<div
 				index={index}
 				draggable="true"
-				onDragStart={(e) =>
-					handleDragStart(e, { id: id, title: title, index: index })
-				}
+				onDragStart={(e) => {
+					handleDragStart(e, { id: id, title: title, index: index });
+					setGrab(true);
+				}}
 				onDragEnd={(e) => {
 					e.preventDefault();
 					setExchangeEvent(false);
+					setGrab(false);
 				}}
-				className={Styles.toolContainer}
+				className={
+					Styles.toolContainer +
+					` ${grab ? "opacity-40 duration-200" : ""}`
+				}
 			>
 				<RxCross1
 					className={Styles.removeCross}
