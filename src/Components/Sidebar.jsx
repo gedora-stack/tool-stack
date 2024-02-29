@@ -6,11 +6,11 @@ import SidebarTool from "./SidebarTool";
 const Styles = {
 	sidebarContainer:
 		"relative z-10 flex h-[84vh] min-w-[15rem] max-w-[15rem] flex-col items-center justify-start rounded-r-2xl bg-opacity-35 border-y border-r border-y-zinc-700 border-r-zinc-700 border-opacity-50 bg-zinc-800 px-3 text-sm duration-500",
-	title: "my-4 text-xl font-thin text-zinc-400 select-none",
+	title: "my-4 text-xl font-thin text-zinc-300 select-none",
 	stackContainer:
 		"container-snap h-full w-[12rem] overflow-y-scroll border-b border-t border-b-zinc-700 border-opacity-50 border-t-zinc-700 py-6",
 	toolTip:
-		"font-sm flex h-full animate-fade items-center justify-center text-center font-thin text-zinc-500 animate-duration-300 select-none",
+		"font-sm flex h-full animate-fade items-center justify-center text-center font-thin text-zinc-400 animate-duration-300 select-none",
 	additionHelper:
 		"absolute -right-14 top-1/2 text-3xl text-emerald-500 duration-300",
 	exclusionHelper:

@@ -19,6 +19,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import SidebarSingle from "./SidebarSingle";
 
 const Styles = {
+	background: "bg-custom absolute z-0 h-screen w-full",
 	pageContainer:
 		"flex h-screen flex-row items-center w-full overflow-y-hidden z-20 justify-between bg-zinc-900",
 	mainContainer:
@@ -151,7 +152,7 @@ const App = () => {
 				onDragOver={(e) => {
 					e.preventDefault();
 				}}
-				className="bg-custom absolute z-0 h-screen w-full"
+				className={Styles.background}
 			></div>
 			<div className={Styles.pageContainer}>
 				<AnimatePresence mode="wait">
