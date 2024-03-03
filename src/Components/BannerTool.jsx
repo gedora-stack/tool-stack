@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { BsBoxArrowUpRight, BsPlusSquare } from "react-icons/bs";
 
 const Styles = {
 	container:
-		"group relative flex h-36 w-56 max-w-56 cursor-grab select-none flex-col items-center justify-center space-y-4 rounded-2xl border border-opacity-40 shadow-sm border-zinc-700 bg-zinc-800 bg-opacity-35 p-8 duration-100 active:cursor-grabbing active:outline-none",
+		"group relative flex animate-fade-down h-36 w-56 max-w-56 cursor-grab select-none flex-col items-center justify-center space-y-4 rounded-2xl border border-opacity-40 shadow-sm border-zinc-700 bg-zinc-800 bg-opacity-35 p-8 duration-100 active:cursor-grabbing active:outline-none",
 	description:
 		"absolute w-40 text-center text-sm font-thin text-zinc-300 text-opacity-80 opacity-0 duration-300 group-hover:translate-y-6 group-hover:opacity-100",
 	titleContainer: "flex flex-col items-center space-y-6",
@@ -27,6 +27,7 @@ const BannerTool = ({
 	description,
 	handleQuickAdd,
 	handleSingleMode,
+	index,
 }) => {
 	const [dragRemove, setDragRemove] = useState(false);
 
@@ -41,6 +42,7 @@ const BannerTool = ({
 			}}
 			key={id}
 			draggable="true"
+			style={{ animationDelay: `${index * 50}ms` }}
 			className={Styles.container}
 		>
 			<p className={Styles.description}>{description}</p>

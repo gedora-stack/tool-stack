@@ -223,8 +223,9 @@ const App = () => {
 									}}
 								/>
 								<div className={Styles.bannerGrid}>
-									{filteredTools.map((tool) => (
+									{filteredTools.map((tool, index) => (
 										<BannerTool
+											index={index}
 											handleSingleMode={handleSingleMode}
 											handleQuickAdd={handleQuickAdd}
 											handleDragStart={handleDragStart}
