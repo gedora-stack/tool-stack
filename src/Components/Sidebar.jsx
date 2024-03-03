@@ -130,12 +130,12 @@ const Sidebar = ({ setDeployed, deployed, stackedTools, setStackedTools }) => {
 				)}
 			</div>
 			<div
-				className={`${Styles.additionHelper} ${additionHelper && !exchangeEvent ? "-translate-x-3 rotate-0 opacity-100" : "translate-x-0 rotate-90 opacity-0"}`}
+				className={`${Styles.additionHelper} ${additionHelper && !exchangeEvent ? "-translate-x-3 rotate-0 opacity-100 delay-200" : "translate-x-0 rotate-90 opacity-0"}`}
 			>
 				<BsFillPlusCircleFill />
 			</div>
 			<div
-				className={`${Styles.exclusionHelper} ${exclusionHelper && exchangeEvent ? "translate-x-3 rotate-0 opacity-100" : "translate-x-0 -rotate-90 opacity-0"}`}
+				className={`${Styles.exclusionHelper} ${exclusionHelper && exchangeEvent ? "translate-x-3 rotate-0 opacity-100 delay-200" : "translate-x-0 -rotate-90 opacity-0"}`}
 			>
 				<BsFillXCircleFill />
 			</div>

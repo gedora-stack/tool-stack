@@ -27,15 +27,15 @@ const SidebarTool = ({
 	setExclusionHelper,
 	handleDragOver,
 	draggedIndex,
-	setDraggedIndex
+	setDraggedIndex,
 }) => {
-	const [exchange, setExchange] = useState(false);
 	const [grab, setGrab] = useState(false);
 
 	useEffect(() => {
 		return () => {
 			setExclusionHelper(false);
 			setExchangeEvent(false);
+			setDraggedIndex(null);
 		};
 	}, []);
 
@@ -43,10 +43,8 @@ const SidebarTool = ({
 	//at the index of the tool that it is being dropped on
 	const handleDragEnd = (e) => {
 		setAdditionHelper(false);
-		setExchange(false);
 		e.stopPropagation();
 
-		const toolIndex = e.dataTransfer.getData("toolIndex");
 		const toolTitle = e.dataTransfer.getData("toolTitle");
 		const toolId = e.dataTransfer.getData("toolId");
 
@@ -62,41 +60,10 @@ const SidebarTool = ({
 		}
 	};
 
-	const handleHover = (e) => {
-		setAdditionHelper(false);
-		setExchange(false);
-		e.stopPropagation();
-
-		const toolIndex = e.dataTransfer.getData("toolIndex");
-		const toolTitle = e.dataTransfer.getData("toolTitle");
-		const toolId = e.dataTransfer.getData("toolId");
-
-		const updatedTools = [...stackedTools];
-
-		updatedTools.splice(parseInt(toolIndex, 10), 1);
-
-		updatedTools.splice(index, 0, {
-			title: toolTitle,
-			id: toolId,
-		});
-
-		handleToolDrop(updatedTools);
-	};
-
 	return (
-		<div
-			className={Styles.motionContainer}
-			onDrop={handleDragEnd}
-			onDragOver={(e) => {
-				e.preventDefault();
-				setExchange(true);
-			}}
-			onDragLeave={(e) => {
-				e.preventDefault();
-				setExchange(false);
-			}}
-		>
+		<div className={Styles.motionContainer}>
 			<motion.div
+				onDrop={handleDragEnd}
 				index={index}
 				draggable="true"
 				onDragStart={(e) => {
@@ -114,7 +81,7 @@ const SidebarTool = ({
 					` ${grab ? "opacity-0 duration-200" : ""}`
 				}
 				onDragOver={handleDragOver}
-				transition={{ duration: 0.2 }}
+				transition={{ duration: 0.1 }}
 				layout
 				key={id}
 			>
