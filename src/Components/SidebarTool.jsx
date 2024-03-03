@@ -11,7 +11,7 @@ const Styles = {
 	removeCross:
 		"cursor-pointer duration-300 hover:scale-[1.4] hover:text-rose-500",
 	title: "flex-grow text-center",
-	arrow: "text-lg text-zinc-400 duration-300",
+	arrow: "text-lg text-zinc-400 duration-300 my-3",
 };
 
 const SidebarTool = ({
@@ -25,6 +25,9 @@ const SidebarTool = ({
 	setAdditionHelper,
 	setExchangeEvent,
 	setExclusionHelper,
+	handleDragOver,
+	draggedIndex,
+	setDraggedIndex
 }) => {
 	const [exchange, setExchange] = useState(false);
 	const [grab, setGrab] = useState(false);
@@ -47,18 +50,7 @@ const SidebarTool = ({
 		const toolTitle = e.dataTransfer.getData("toolTitle");
 		const toolId = e.dataTransfer.getData("toolId");
 
-		if (toolId.startsWith("s")) {
-			const updatedTools = [...stackedTools];
-
-			updatedTools.splice(parseInt(toolIndex, 10), 1);
-
-			updatedTools.splice(index + 1, 0, {
-				title: toolTitle,
-				id: toolId,
-			});
-
-			handleToolDrop(updatedTools);
-		} else if (toolId.startsWith("b")) {
+		if (toolId.startsWith("b")) {
 			const updatedTools = [...stackedTools];
 
 			updatedTools.splice(index + 1, 0, {
@@ -70,14 +62,29 @@ const SidebarTool = ({
 		}
 	};
 
+	const handleHover = (e) => {
+		setAdditionHelper(false);
+		setExchange(false);
+		e.stopPropagation();
+
+		const toolIndex = e.dataTransfer.getData("toolIndex");
+		const toolTitle = e.dataTransfer.getData("toolTitle");
+		const toolId = e.dataTransfer.getData("toolId");
+
+		const updatedTools = [...stackedTools];
+
+		updatedTools.splice(parseInt(toolIndex, 10), 1);
+
+		updatedTools.splice(index, 0, {
+			title: toolTitle,
+			id: toolId,
+		});
+
+		handleToolDrop(updatedTools);
+	};
+
 	return (
-		<motion.div
-			key={id}
-			initial={{ opacity: 0, scale: 0 }}
-			animate={{ opacity: 1, scale: 1 }}
-			exit={{ opacity: 0, scale: 0 }}
-			transition={{ duration: 0.2 }}
-			layout
+		<div
 			className={Styles.motionContainer}
 			onDrop={handleDragEnd}
 			onDragOver={(e) => {
@@ -89,7 +96,7 @@ const SidebarTool = ({
 				setExchange(false);
 			}}
 		>
-			<div
+			<motion.div
 				index={index}
 				draggable="true"
 				onDragStart={(e) => {
@@ -100,11 +107,16 @@ const SidebarTool = ({
 					e.preventDefault();
 					setExchangeEvent(false);
 					setGrab(false);
+					setDraggedIndex(null);
 				}}
 				className={
 					Styles.toolContainer +
-					` ${grab ? "opacity-40 duration-200" : ""}`
+					` ${grab ? "opacity-0 duration-200" : ""}`
 				}
+				onDragOver={handleDragOver}
+				transition={{ duration: 0.2 }}
+				layout
+				key={id}
 			>
 				<RxCross1
 					className={Styles.removeCross}
@@ -113,11 +125,11 @@ const SidebarTool = ({
 					}}
 				/>
 				<div className={Styles.title}>{title}</div>
-			</div>
+			</motion.div>
 			<BsChevronDown
-				className={`${Styles.arrow} ${exchange ? "mb-16 mt-3" : "my-3"} ${index != stackedTools.length - 1 ? "opacity-100" : "-translate-y-5 opacity-0"}`}
+				className={`${Styles.arrow} ${draggedIndex === null ? "" : "opacity-0"} ${index != stackedTools.length - 1 ? "" : "-translate-y-5 opacity-0"}`}
 			/>
-		</motion.div>
+		</div>
 	);
 };
 

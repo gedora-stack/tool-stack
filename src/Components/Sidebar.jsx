@@ -25,13 +25,28 @@ const Sidebar = ({ setDeployed, deployed, stackedTools, setStackedTools }) => {
 	const [additionHelper, setAdditionHelper] = useState(false);
 	const [exclusionHelper, setExclusionHelper] = useState(false);
 	const [exchangeEvent, setExchangeEvent] = useState(false);
+	const [draggedIndex, setDraggedIndex] = useState(null);
 
 	//For stacked tools, grabs the id, title and index in stack of the dragged tool
 	const handleDragStart = (e, tool) => {
 		setExchangeEvent(true);
+		setDraggedIndex(tool.index);
 		e.dataTransfer.setData("toolTitle", tool.title);
 		e.dataTransfer.setData("toolId", tool.id);
 		e.dataTransfer.setData("toolIndex", tool.index);
+	};
+
+	const handleDragOver = (e, index) => {
+		e.preventDefault();
+		// Ensure we're dragging over a different item and not the dragged item itself
+		if (draggedIndex !== null && index !== draggedIndex) {
+			const tools = [...stackedTools];
+			const obj = tools[draggedIndex];
+			tools.splice(draggedIndex, 1);
+			tools.splice(index, 0, obj);
+			setDraggedIndex(index);
+			setStackedTools(tools);
+		}
 	};
 
 	//When dropping, checks if tool dropped is from the display part, if it is, adds it to the end of array
@@ -105,8 +120,11 @@ const Sidebar = ({ setDeployed, deployed, stackedTools, setStackedTools }) => {
 							stackedTools={stackedTools}
 							handleToolDrop={handleToolDrop}
 							handleDragStart={handleDragStart}
+							handleDragOver={(e) => handleDragOver(e, index)}
 							title={tool.title}
 							id={tool.id}
+							draggedIndex={draggedIndex}
+							setDraggedIndex={setDraggedIndex}
 						/>
 					))
 				)}
