@@ -5,7 +5,7 @@ import { RxCross1 } from "react-icons/rx";
 import { BsChevronDown } from "react-icons/bs";
 
 const Styles = {
-	motionContainer: "flex flex-col items-center",
+	motionContainer: "flex flex-col items-center duration-100",
 	toolContainer:
 		"flex w-[10.5rem] cursor-grab flex-row items-center justify-between rounded-xl border border-opacity-50 border-zinc-700 bg-zinc-800 bg-opacity-15 py-3 pl-3 font-thin text-zinc-300",
 	removeCross:
@@ -26,15 +26,19 @@ const SidebarTool = ({
 	setExchangeEvent,
 	setExclusionHelper,
 	handleDragOver,
-	draggedIndex,
 	setDraggedIndex,
+	exchangeEvent,
+	addEvent,
+	setAddEvent,
 }) => {
 	const [grab, setGrab] = useState(false);
+	const [append, setAppend] = useState(false);
 
 	useEffect(() => {
 		return () => {
 			setExclusionHelper(false);
 			setExchangeEvent(false);
+			setAddEvent(false);
 			setDraggedIndex(null);
 		};
 	}, []);
@@ -43,6 +47,7 @@ const SidebarTool = ({
 	//at the index of the tool that it is being dropped on
 	const handleDragEnd = (e) => {
 		setAdditionHelper(false);
+		setAppend(false);
 		e.stopPropagation();
 
 		const toolTitle = e.dataTransfer.getData("toolTitle");
@@ -51,7 +56,7 @@ const SidebarTool = ({
 		if (toolId.startsWith("b")) {
 			const updatedTools = [...stackedTools];
 
-			updatedTools.splice(index + 1, 0, {
+			updatedTools.splice(index, 0, {
 				title: toolTitle,
 				id: toolId.replace("b", "s") + "-" + uuidv4(),
 			});
@@ -61,9 +66,16 @@ const SidebarTool = ({
 	};
 
 	return (
-		<div className={Styles.motionContainer}>
+		<div
+			onDrop={handleDragEnd}
+			onDragOver={() => setAppend(true)}
+			onDragLeave={() => setAppend(false)}
+			className={
+				Styles.motionContainer +
+				` ${append && !exchangeEvent ? "pt-16" : ""}`
+			}
+		>
 			<motion.div
-				onDrop={handleDragEnd}
 				index={index}
 				draggable="true"
 				onDragStart={(e) => {
@@ -73,6 +85,7 @@ const SidebarTool = ({
 				onDragEnd={(e) => {
 					e.preventDefault();
 					setExchangeEvent(false);
+					setAddEvent(false);
 					setGrab(false);
 					setDraggedIndex(null);
 				}}
@@ -94,7 +107,7 @@ const SidebarTool = ({
 				<div className={Styles.title}>{title}</div>
 			</motion.div>
 			<BsChevronDown
-				className={`${Styles.arrow} ${draggedIndex === null ? "" : "opacity-0"} ${index != stackedTools.length - 1 ? "" : "-translate-y-5 opacity-0"}`}
+				className={`${Styles.arrow} ${exchangeEvent || addEvent ? "opacity-0" : ""} ${index != stackedTools.length - 1 ? "" : "-translate-y-5 opacity-0"}`}
 			/>
 		</div>
 	);

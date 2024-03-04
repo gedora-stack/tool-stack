@@ -37,6 +37,7 @@ const App = () => {
 	const [deployed, setDeployed] = useState(false);
 	const [stackedTools, setStackedTools] = useState([]);
 	const [singleSidebar, setSingleSidebar] = useState(false);
+	const [addEvent, setAddEvent] = useState(false);
 
 	//Array of tools with unique ids
 	const [tools, setTools] = useState([
@@ -105,6 +106,7 @@ const App = () => {
 
 	//Grabs the title and the id when starting drag
 	const handleDragStart = (e, tool) => {
+		setAddEvent(true);
 		e.dataTransfer.setData("toolTitle", tool.title);
 		e.dataTransfer.setData("toolId", tool.id);
 	};
@@ -178,6 +180,8 @@ const App = () => {
 							transition={{ duration: 0.2 }}
 						>
 							<Sidebar
+								addEvent={addEvent}
+								setAddEvent={setAddEvent}
 								setDeployed={setDeployed}
 								deployed={deployed}
 								stackedTools={stackedTools}

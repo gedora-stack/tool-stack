@@ -21,7 +21,14 @@ const Styles = {
 	toggle: "peer my-4 relative h-6 w-10 rounded-full border border-zinc-700 bg-zinc-700 bg-opacity-60 duration-500 after:absolute after:start-[3px] after:top-[3px] after:h-4 after:w-4 after:rounded-full after:bg-zinc-300 after:transition-all after:duration-500 after:content-[''] peer-checked:bg-zinc-300 peer-checked:bg-opacity-40 peer-checked:after:translate-x-full peer-focus:outline-none peer-focus:ring-4 rtl:peer-checked:after:-translate-x-full cursor-pointer",
 };
 
-const Sidebar = ({ setDeployed, deployed, stackedTools, setStackedTools }) => {
+const Sidebar = ({
+	setDeployed,
+	deployed,
+	stackedTools,
+	setStackedTools,
+	addEvent,
+	setAddEvent,
+}) => {
 	const [additionHelper, setAdditionHelper] = useState(false);
 	const [exclusionHelper, setExclusionHelper] = useState(false);
 	const [exchangeEvent, setExchangeEvent] = useState(false);
@@ -55,6 +62,7 @@ const Sidebar = ({ setDeployed, deployed, stackedTools, setStackedTools }) => {
 	const handleDragEnd = (e) => {
 		setAdditionHelper(false);
 		setExchangeEvent(false);
+		setAddEvent(false);
 		const toolTitle = e.dataTransfer.getData("toolTitle");
 		const toolId = e.dataTransfer.getData("toolId");
 
@@ -111,6 +119,9 @@ const Sidebar = ({ setDeployed, deployed, stackedTools, setStackedTools }) => {
 				) : (
 					stackedTools.map((tool, index) => (
 						<SidebarTool
+							addEvent={addEvent}
+							setAddEvent={setAddEvent}
+							exchangeEvent={exchangeEvent}
 							setExclusionHelper={setExclusionHelper}
 							setExchangeEvent={setExchangeEvent}
 							key={tool.id}
