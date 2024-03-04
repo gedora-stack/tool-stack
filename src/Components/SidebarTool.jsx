@@ -48,6 +48,7 @@ const SidebarTool = ({
 	const handleDragEnd = (e) => {
 		setAdditionHelper(false);
 		setAppend(false);
+		setAddEvent(false);
 		e.stopPropagation();
 
 		const toolTitle = e.dataTransfer.getData("toolTitle");
