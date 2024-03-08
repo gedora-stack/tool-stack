@@ -5,7 +5,7 @@ import { RxCross1 } from "react-icons/rx";
 import { BsChevronDown } from "react-icons/bs";
 
 const Styles = {
-	motionContainer: "flex flex-col items-center duration-100",
+	motionContainer: "flex flex-col items-center",
 	toolContainer:
 		"flex w-[10.5rem] cursor-grab flex-row items-center justify-between rounded-xl border border-opacity-50 border-zinc-700 bg-zinc-800 bg-opacity-15 py-3 pl-3 font-thin text-zinc-300",
 	removeCross:
